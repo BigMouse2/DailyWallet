@@ -33,7 +33,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         Fragment fragment = null;
         switch(position){
-            case 0: fragment = Wallet.newInstance()
+            case 0: fragment = new Wallet();
                 break;
             case 1: fragment = new Category();
                 break;
