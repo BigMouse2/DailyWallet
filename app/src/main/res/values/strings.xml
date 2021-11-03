@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DailyWallet</string>
+    <string name="wallet">Wallet</string>
+    <string name="category">Category</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+</resources>
