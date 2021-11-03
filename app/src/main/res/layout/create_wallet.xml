@@ -6,23 +6,64 @@
     android:id="@+id/createWallet">
 
     <TextView
-        android:id="@+id/category"
-        android:text="Category"
-        android:textSize="16dp"
+        android:id="@+id/myWallet"
+        android:text="My Wallet"
+        android:textSize="26dp"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="false"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         />
 
-    <EditText
+    <TextView
+        android:id="@+id/walletName"
+        android:text="wallet name"
+        android:textSize="26dp"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="false"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/myWallet"
         />
+
+    <EditText
+        android:id="@+id/walletNameValue"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/walletName"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:hint="define your wallet name here" />
+
+    <TextView
+        android:id="@+id/budget"
+        android:text="Define your Budget"
+        android:textSize="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/walletNameValue"
+        />
+
+    <EditText
+        android:id="@+id/budgetAmont"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/budget"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:hint="define your budget" />
 
 
 
