@@ -66,5 +66,6 @@ public class PlaceholderFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        test="m";
     }
 }
