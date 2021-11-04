@@ -6,90 +6,27 @@
     android:id="@+id/createWallet">
 
     <TextView
-        android:id="@+id/myWallet"
+        android:id="@+id/category"
+        android:text="Category"
+        android:textSize="16dp"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="false"
         android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:text="My Wallet"
-        android:textSize="26dp" />
-
-    <TextView
-        android:id="@+id/walletName"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
-        android:layout_below="@+id/myWallet"
-        android:text="wallet name"
-        android:textSize="20dp" />
+        />
 
     <EditText
-        android:id="@+id/walletNameValue"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/walletName"
-        android:hint="define your wallet name here" />
-
-    <TextView
-        android:id="@+id/budget"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_below="@+id/walletNameValue"
+        android:layout_height="40dp"
         android:layout_alignParentTop="false"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:text="Define your budget"
-        android:textSize="20dp" />
+        android:layout_marginTop="5dp"
+        />
 
-    <EditText
-        android:id="@+id/budgetAmont"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="false"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/budget"
-        android:hint="define your budget" />
 
-    <TextView
-        android:id="@+id/chooseCurrency"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/budgetAmont"
-        android:text="Choose your currency"
-        android:textSize="20dp" />
 
-    <Spinner
-        android:id="@id/chooseCurrencyValue"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@id/chooseCurrency"
-        android:spinnerMode="dialog" />
 
-    <TextView
-        android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/chooseCurrencyValue"
-        android:text="select period"
-        android:textSize="20dp" />
 
 
 </RelativeLayout>

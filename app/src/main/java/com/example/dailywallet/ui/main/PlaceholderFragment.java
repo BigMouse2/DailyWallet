@@ -29,6 +29,7 @@ public class PlaceholderFragment extends Fragment {
         bundle.putInt(ARG_SECTION_NUMBER, index);
         fragment.setArguments(bundle);
         return fragment;
+        //ceci est un prout
     }
 
     @Override
