@@ -13,7 +13,7 @@ import com.example.dailywallet.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CreateWallet extends Activity {
-
+////testtttttt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
