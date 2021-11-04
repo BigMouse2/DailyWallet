@@ -36,7 +36,7 @@ public class CreateWallet extends Activity {
         });
 
     }
-
+ /////test test test
     public void openActivityMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
