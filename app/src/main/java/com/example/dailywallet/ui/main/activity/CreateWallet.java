@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class CreateWallet extends AppCompatActivity {
 
@@ -17,17 +18,31 @@ public class CreateWallet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_wallet);
 
-        Button button = (Button) findViewById(R.id.save);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button create = (Button) findViewById(R.id.save);
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openActivityMainActivity();
             }
         });
+
+        FloatingActionButton back  = (FloatingActionButton) findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openReturnHomeActivity();
+            }
+        });
+
     }
 
     public void openActivityMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void openReturnHomeActivity(){
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
 
