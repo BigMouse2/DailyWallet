@@ -38,6 +38,7 @@
         android:textSize="20sp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="16dp"
+
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -46,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        app:srcCompat="@drawable/ic_action_menu_back"/>
+        android:layout_marginLeft="16dp"/>
+<!--        app:srcCompat="@android:drawable/ic_menu_back"-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
