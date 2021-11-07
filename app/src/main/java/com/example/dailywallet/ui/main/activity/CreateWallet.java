@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.fragment.Wallet;
 import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -72,7 +74,7 @@ public class CreateWallet extends AppCompatActivity {
         Button button = findViewById(R.id.save);
         button.setOnClickListener(view -> {
             saveWallet();
-           // openActivityMainActivity();
+            // openActivityMainActivity();
 
         });
 
@@ -83,7 +85,25 @@ public class CreateWallet extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        walletDocument.addSnapshotListener(this, (documentSnapshot, e) -> {
+        walletReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
+                if( error != null){
+                    return;
+                }
+                //List<WalletModel> walletModelList = new ArrayList<>();
+                StringBuilder sb = new StringBuilder();
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){ //documentSnapshot contain one document
+                    WalletModel wallet  = documentSnapshot.toObject(WalletModel.class);
+                    wallet.setDocumentId(documentSnapshot.getId());
+                    //walletModelList.add(wallet);
+                    sb.append("Name: " + wallet.getName() +"\n");
+
+                }
+                textViewData.setText(sb.toString());
+            }
+        });
+/*        walletDocument.addSnapshotListener(this, (documentSnapshot, e) -> {
             if (e != null) {
                 Toast.makeText(CreateWallet.this, "Error while loading!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, e.toString());
@@ -99,7 +119,7 @@ public class CreateWallet extends AppCompatActivity {
             }else{
                 textViewData.setText("");
             }
-        });
+        });*/
     }
 
     public void saveWallet(){
@@ -121,36 +141,21 @@ public class CreateWallet extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) { //QuerySnapshot contain all documents
-                     //   List<WalletModel> walletModelList = new ArrayList<>();
-                        String data ="";
+                       // List<WalletModel> walletModelList = new ArrayList<>();
+                        StringBuilder sb = new StringBuilder();
                         for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){ //documentSnapshot contain one document
                             //pass our data
                             WalletModel wallet  = documentSnapshot.toObject(WalletModel.class);
-                        //    walletModelList.add(wallet);
-                            String name = wallet.getName();
-                            float amount = wallet.getBudgetAmount();
-
-                            data += "Name: " +name + "\nBudget Amount : " +amount + "\n\n";
+                          //  walletModelList.add(wallet);
+                            wallet.setDocumentId(documentSnapshot.getId());
+                            //sb.append(walletModelList.get().getName());
+                            sb.append("Name: " + wallet.getName() +"\n");
+                            sb.append("Budget Amount: " +wallet.getBudgetAmount());
+                            sb.append("\n\n");
                         }
-                      //  textViewData.setText(walletModelList);
-                        textViewData.setText(data);
+                        textViewData.setText(sb.toString());
                     }
                 });
- /*               .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        WalletModel wallet =documentSnapshot.toObject(WalletModel.class);
-                        String name =  wallet.getName();
-                        float budgetAmount = wallet.getBudgetAmount();
-
-                        textViewData.setText("Title: " + name + "\n" + "budget: " + budgetAmount);
-                    } else {
-                        Toast.makeText(CreateWallet.this, "Document does not exist", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(CreateWallet.this, "Error!", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, e.toString());
-                });*/
     }
 
     public void openHomeActivity(){
