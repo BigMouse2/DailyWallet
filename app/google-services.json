@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "479790665196",
+    "project_id": "application-mobile-uqac",
+    "storage_bucket": "application-mobile-uqac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:479790665196:android:56364e01857caea3d744c9",
+        "android_client_info": {
+          "package_name": "com.example.dailywallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "479790665196-aariv1orin51uj3ivj8pegnu35db2lqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_rUutvPNPaTvV333OgNpy7KFaiKKJCiE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "479790665196-aariv1orin51uj3ivj8pegnu35db2lqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,13 +2,26 @@ package com.example.dailywallet.ui.main.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.activity.CreateWallet;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,14 +30,10 @@ import com.example.dailywallet.R;
  */
 public class Wallet extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_WALLET_NAME = "argWalletName";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String wallet;
+
 
     public Wallet() {
         // Required empty public constructor
@@ -34,16 +43,14 @@ public class Wallet extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param wallet Parameter 1.
      * @return A new instance of fragment Wallet.
      */
     // TODO: Rename and change types and number of parameters
-    public static Wallet newInstance(String param1, String param2) {
+    public static Wallet newInstance(String wallet) {
         Wallet fragment = new Wallet();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_WALLET_NAME, wallet);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,15 +59,25 @@ public class Wallet extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            wallet = getArguments().getString(ARG_WALLET_NAME);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wallet, container, false);
+        View v = inflater.inflate(R.layout.fragment_wallet, container, false);
+        TextView walletName = v.findViewById(R.id.text_view_data);
+
+        //set arguments
+        if (getArguments() != null) {
+            wallet = getArguments().getString(ARG_WALLET_NAME);
+        }
+        walletName.setText(wallet);
+
+
+        return v;
     }
+
 }

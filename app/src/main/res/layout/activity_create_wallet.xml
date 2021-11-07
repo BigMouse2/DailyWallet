@@ -15,10 +15,10 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/edit_text_description"
+        android:id="@+id/edit_text_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:hint="Budget"
         android:inputType="text" />
 
     <Button
@@ -26,7 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="saveNote"
-        android:text="Save" />
+        android:text="Save"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="loadNote"
+        android:text="Load" />
+
+    <TextView
+        android:id="@+id/text_view_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

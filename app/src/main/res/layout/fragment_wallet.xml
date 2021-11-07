@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.fragment.Wallet">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/load"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Wallet Page" />
+        android:layout_height="wrap_content"
+        android:onClick="loadWallet"
+        android:text="Load" />
+
+    <TextView
+        android:id="@+id/text_view_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/load"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20sp" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:srcCompat="@drawable/ic_action_menu_back"
+        />
+
+</RelativeLayout>
+
 
 </FrameLayout>
