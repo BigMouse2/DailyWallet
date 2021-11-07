@@ -31,14 +31,20 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="loadNote"
+        android:onClick="loadWallet"
         android:text="Load" />
 
-    <TextView
-        android:id="@+id/text_view_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_view_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </androidx.core.widget.NestedScrollView>
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
