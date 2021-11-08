@@ -1,59 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edit_text_title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Title"
-        android:inputType="text" />
+        android:layout_height="821dp">
 
-    <EditText
-        android:id="@+id/edit_text_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Budget"
-        android:inputType="text" />
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="124dp"
+            android:layout_height="wrap_content"
+            android:text="My Wallet"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="128dp"
+            android:layout_height="18dp"
+            android:text="Wallet name:"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_text_title"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_title" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="131dp"
+            android:layout_height="23dp"
+            android:text="Define your budget:"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/edit_text_amount"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_amount" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="149dp"
+            android:layout_height="20dp"
+            android:layout_marginBottom="4dp"
+            android:text="Choose your currency:"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_currency"
+            app:layout_constraintStart_toStartOf="@+id/text_view_currency" />
+
+        <Spinner
+            android:id="@+id/text_view_currency"
+            android:layout_width="335dp"
+            android:layout_height="58dp"
+            android:layout_below="@id/calendarView"
+            android:layout_marginBottom="24dp"
+            android:entries="@array/currency"
+            android:spinnerMode="dialog"
+            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_amount" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Define your start period: "
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_startDate"
+            app:layout_constraintStart_toStartOf="@+id/text_view_startDate" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Define your end period: "
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_endDate"
+            app:layout_constraintStart_toStartOf="@+id/text_view_endDate" />
+
+        <EditText
+            android:id="@+id/edit_text_title"
+            android:layout_width="331dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="@+id/edit_text_title" />
+
+        <EditText
+            android:id="@+id/text_view_startDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            tools:layout_editor_absoluteX="40dp" />
+
+        <EditText
+            android:id="@+id/text_view_endDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:minHeight="48dp"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="571dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/save"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="saveNote"
-        android:text="Save"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="loadWallet"
-        android:text="Load" />
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/text_view_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp" />
-    </androidx.core.widget.NestedScrollView>
-
-
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="save"
+        android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginLeft="16dp"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_action_menu_back"/>
+        app:srcCompat="@drawable/ic_action_menu_back" />
 
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,5 @@
 <resources>
+    <!-- Menu String-->
     <string name="app_name">DailyWallet</string>
     <string name="wallet">Wallet</string>
     <string name="category">Category</string>
@@ -8,8 +9,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <!-- Currency List-->
     <string-array name="currency">
         <item> € </item>
         <item> $ </item>
+    </string-array>
+
+
+    <!-- Wallet List Example string-->
+    <string-array name="existing_wallet_example">
+        <item> First Wallet </item>
+        <item> Second Wallet </item>
+        <item> Third Wallet </item>
+        <item> Fourth Wallet </item>
     </string-array>
 </resources>
