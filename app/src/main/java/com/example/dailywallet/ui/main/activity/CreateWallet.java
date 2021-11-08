@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class CreateWallet extends AppCompatActivity {
     //elements du visuel
     private EditText editTextTitle;
     private EditText editTextAmount;
-    private EditText editTextCurrency;
+    private Spinner editTextCurrency;
     private EditText editTextStartDate;
     private EditText editTextEndDate;
     private TextView textViewData;
@@ -52,8 +53,6 @@ public class CreateWallet extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
     private DocumentReference walletDocument = db.document("Wallet/Wallet2");
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +62,14 @@ public class CreateWallet extends AppCompatActivity {
         //correspondance avec les elements du visuel
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAmount = findViewById(R.id.edit_text_amount);
-        textViewData = findViewById(R.id.text_view_data);
-//        textViewCurrency = findViewById(R.id.text_view_currency);
-//        textViewStartDate = findViewById(R.id.text_view_startDate);
-//        textViewEndDate = findViewById(R.id.endDate);
-
-
-
+        editTextCurrency = findViewById(R.id.text_view_currency);
+        editTextStartDate = findViewById(R.id.text_view_startDate);
+        editTextEndDate = findViewById(R.id.text_view_endDate);
 
         Button button = findViewById(R.id.save);
         button.setOnClickListener(view -> {
             saveWallet();
-            // openActivityMainActivity();
+            openActivityMainActivity();
 
         });
 
@@ -85,7 +80,7 @@ public class CreateWallet extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        walletReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+ /*       walletReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
                 if( error != null){
@@ -100,10 +95,10 @@ public class CreateWallet extends AppCompatActivity {
                     sb.append("Name: " + wallet.getName() +"\n");
 
                 }
-                textViewData.setText(sb.toString());
+                editTextTitle.setText(sb.toString());
             }
         });
-/*        walletDocument.addSnapshotListener(this, (documentSnapshot, e) -> {
+        walletDocument.addSnapshotListener(this, (documentSnapshot, e) -> {
             if (e != null) {
                 Toast.makeText(CreateWallet.this, "Error while loading!", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, e.toString());
@@ -136,7 +131,7 @@ public class CreateWallet extends AppCompatActivity {
                 });
     }
 
-    public void loadWallet(View v) {
+/*    public void loadWallet(View v) {
         walletReference.get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -156,7 +151,7 @@ public class CreateWallet extends AppCompatActivity {
                         textViewData.setText(sb.toString());
                     }
                 });
-    }
+    }*/
 
     public void openHomeActivity(){
         Intent intent = new Intent(this, HomeActivity.class);

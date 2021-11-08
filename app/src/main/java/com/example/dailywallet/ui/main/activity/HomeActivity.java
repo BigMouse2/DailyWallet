@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
@@ -25,13 +27,17 @@ public class HomeActivity extends Activity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
 
+    private ListView editWalletList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Button button = findViewById(R.id.createWallet);
-        button.setOnClickListener(new View.OnClickListener() {
+        //correspondance avec les élèments du visuel
+        editWalletList = findViewById(R.id.wallet_list);
+
+        editWalletList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openActivityCreateWallet();

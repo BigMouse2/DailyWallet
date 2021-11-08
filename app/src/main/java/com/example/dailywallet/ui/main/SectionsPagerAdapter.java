@@ -33,7 +33,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         Fragment fragment = null;
         switch(position){
-            case 0: fragment = Wallet.newInstance("wallet");
+            case 0: fragment = Wallet.newInstance("test");
                 break;
             case 1: fragment = new Category();
                 break;
@@ -55,5 +55,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show total pages.
         return 4;
+    }
+
+    public Context getmContext() {
+        return mContext;
     }
 }

@@ -54,7 +54,7 @@
             android:id="@+id/text_view_currency"
             android:layout_width="335dp"
             android:layout_height="58dp"
-            android:layout_below="@id/calendarView"
+            android:layout_below="@id/text_view_currency"
             android:layout_marginBottom="24dp"
             android:entries="@array/currency"
             android:spinnerMode="dialog"
@@ -86,7 +86,6 @@
             android:layout_marginBottom="16dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintBottom_toTopOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -105,21 +104,23 @@
             android:id="@+id/text_view_startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:ems="10"
             android:inputType="date"
             android:minHeight="48dp"
             app:layout_constraintBottom_toTopOf="@+id/textView9"
-            tools:layout_editor_absoluteX="40dp" />
+            app:layout_constraintStart_toStartOf="@+id/text_view_currency" />
 
         <EditText
             android:id="@+id/text_view_endDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="589dp"
             android:ems="10"
             android:inputType="date"
             android:minHeight="48dp"
-            tools:layout_editor_absoluteX="40dp"
-            tools:layout_editor_absoluteY="571dp" />
+            app:layout_constraintStart_toStartOf="@+id/text_view_startDate"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
