@@ -12,6 +12,7 @@ public class WalletModel {
     private String currency;
     private Date startDate;
     private Date endDate;
+    private ReceiptModel receipt;
 
     public WalletModel() {
         //non-args construc for firestore
@@ -69,5 +70,13 @@ public class WalletModel {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public ReceiptModel getReceipt() {
+        return receipt;
+    }
+
+    public void setReceipt(ReceiptModel receipt) {
+        this.receipt = receipt;
     }
 }

@@ -1,38 +1,31 @@
 package com.example.dailywallet.ui.main.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
-import com.example.dailywallet.ui.main.fragment.Wallet;
 import com.example.dailywallet.ui.main.model.WalletModel;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
-public class CreateWallet extends AppCompatActivity {
+public class CreateWallet extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final String TAG = "createWallet";
 
@@ -45,10 +38,9 @@ public class CreateWallet extends AppCompatActivity {
     //elements du visuel
     private EditText editTextTitle;
     private EditText editTextAmount;
-    private Spinner editTextCurrency;
-    private EditText editTextStartDate;
-    private EditText editTextEndDate;
-    private TextView textViewData;
+    private Spinner spinnerSelectedCurrency;
+    private TextView textViewStartDate;
+    private TextView textViewEndDate;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
@@ -62,24 +54,33 @@ public class CreateWallet extends AppCompatActivity {
         //correspondance avec les elements du visuel
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextAmount = findViewById(R.id.edit_text_amount);
-        editTextCurrency = findViewById(R.id.text_view_currency);
-        editTextStartDate = findViewById(R.id.text_view_startDate);
-        editTextEndDate = findViewById(R.id.text_view_endDate);
+        spinnerSelectedCurrency = findViewById(R.id.spinnerCurrency);
+        textViewStartDate = findViewById(R.id.text_view_startDate);
+        textViewEndDate = findViewById(R.id.text_view_endDate);
 
+        //choisir sa devise
+
+        //choisir sa date de début
+        findViewById(R.id.buttonPickStartDate).setOnClickListener(view -> showStartDatePickerDialog());
+
+        //choisir sa date de fin
+        findViewById(R.id.buttonPickEndDate).setOnClickListener(view -> showEndDatePickerDialog());
+
+        //sauvegarder son wallet
         Button button = findViewById(R.id.save);
         button.setOnClickListener(view -> {
             saveWallet();
-            openActivityMainActivity();
-
+            openActivityMainActivity(); //aller à la page de son wallet
         });
 
+        //retourner à la page home
         FloatingActionButton back = findViewById(R.id.back);
         back.setOnClickListener(view -> openHomeActivity());
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
+        super.onStart(); //charger les données au lancement de l'activité
  /*       walletReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
@@ -117,12 +118,16 @@ public class CreateWallet extends AppCompatActivity {
         });*/
     }
 
+    //sauvegarder son wallet en bdd
     public void saveWallet(){
+        // 1) renseigner chaque attribut du model
         String name = editTextTitle.getText().toString();
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
 
+        //appeler le constructeur
         WalletModel wallet = new WalletModel(name,budgetAmount);
 
+        //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
                 .addOnSuccessListener(aVoid -> Toast.makeText(CreateWallet.this,"Wallet Saved",Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> {
@@ -153,13 +158,48 @@ public class CreateWallet extends AppCompatActivity {
                 });
     }*/
 
+    //retourner au menu d'accueil
     public void openHomeActivity(){
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
+
+    //aller à la page de son wallet
     public void openActivityMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //choisir sa date de début
+    public void showStartDatePickerDialog(){
+        DatePickerDialog startDatePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        startDatePickerDialog.show();
+    }
+
+    //choisir sa date de fin
+    public void showEndDatePickerDialog(){
+        DatePickerDialog startDatePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        startDatePickerDialog.show();
+    }
+
+    //retourne les dates choisies aux methods DatePicker
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String startDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
+        String endDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
+        textViewStartDate.setText(startDate);
+        textViewEndDate.setText(endDate);
+    }
 }

@@ -47,22 +47,22 @@
             android:layout_marginBottom="4dp"
             android:text="Choose your currency:"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/text_view_currency"
-            app:layout_constraintStart_toStartOf="@+id/text_view_currency" />
+            app:layout_constraintBottom_toTopOf="@+id/spinnerCurrency"
+            app:layout_constraintStart_toStartOf="@+id/spinnerCurrency" />
 
         <Spinner
-            android:id="@+id/text_view_currency"
+            android:id="@+id/spinnerCurrency"
             android:layout_width="335dp"
             android:layout_height="58dp"
-            android:layout_below="@id/text_view_currency"
+            android:layout_below="@id/spinnerCurrency"
             android:layout_marginBottom="24dp"
             android:entries="@array/currency"
             android:spinnerMode="dialog"
-            app:layout_constraintBottom_toTopOf="@+id/textView5"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPickStartDate"
             app:layout_constraintStart_toStartOf="@+id/edit_text_amount" />
 
-        <TextView
-            android:id="@+id/textView5"
+        <Button
+            android:id="@+id/buttonPickStartDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Define your start period: "
@@ -70,8 +70,8 @@
             app:layout_constraintBottom_toTopOf="@+id/text_view_startDate"
             app:layout_constraintStart_toStartOf="@+id/text_view_startDate" />
 
-        <TextView
-            android:id="@+id/textView9"
+        <Button
+            android:id="@+id/buttonPickEndDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Define your end period: "
@@ -100,7 +100,7 @@
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/edit_text_title" />
 
-        <EditText
+        <TextView
             android:id="@+id/text_view_startDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,10 +108,10 @@
             android:ems="10"
             android:inputType="date"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView9"
-            app:layout_constraintStart_toStartOf="@+id/text_view_currency" />
+            app:layout_constraintBottom_toTopOf="@+id/buttonPickEndDate"
+            app:layout_constraintStart_toStartOf="@+id/spinnerCurrency" />
 
-        <EditText
+        <TextView
             android:id="@+id/text_view_endDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
