@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.15677083333333333" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/drawable/back.xml" value="0.15885416666666666" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/drawable/ic_close.xml" value="0.15677083333333333" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15677083333333333" />
         <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/activity_create_wallet.xml" value="0.33" />
-        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/add_receipt.xml" value="0.14953271028037382" />
         <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/create_wallet.xml" value="0.33" />
+        <entry key="..\:/ProjetAppMobile/DailyWallet/app/src/main/res/layout/popup_addcategory.xml" value="0.33" />
         <entry key="..\:/UQAC 2021/Plateforme Mobile/DailyWallet2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
         <entry key="..\:/UQAC 2021/Plateforme Mobile/DailyWallet2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/UQAC 2021/Plateforme Mobile/DailyWallet2/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
