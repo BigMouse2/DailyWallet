@@ -198,8 +198,10 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String startDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
-        String endDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
         textViewStartDate.setText(startDate);
-        textViewEndDate.setText(endDate);
+
+        //end date
+/*        String endDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
+        textViewEndDate.setText(endDate);*/
     }
 }
