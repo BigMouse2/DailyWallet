@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.example.dailywallet.R;
+
 import com.example.dailywallet.databinding.FragmentMainBinding;
+import com.example.dailywallet.ui.main.model.PageViewModel;
 
 /**
  * A placeholder fragment containing a simple view.

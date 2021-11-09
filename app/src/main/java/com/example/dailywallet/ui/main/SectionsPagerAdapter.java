@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.fragment.About;
+import com.example.dailywallet.ui.main.fragment.Category;
+import com.example.dailywallet.ui.main.fragment.Settings;
+import com.example.dailywallet.ui.main.fragment.Wallet;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -27,7 +31,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1);
+        Fragment fragment = null;
+        switch(position){
+            case 0: fragment = Wallet.newInstance("test");
+                break;
+            case 1: fragment = new Category();
+                break;
+            case 2: fragment = new Settings();
+                break;
+            case 3: fragment = new About();
+                break;
+        }
+        return fragment;
     }
 
     @Nullable
@@ -40,5 +55,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show total pages.
         return 4;
+    }
+
+    public Context getmContext() {
+        return mContext;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.dailywallet.ui.main;
+package com.example.dailywallet.ui.main.model;
 
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
