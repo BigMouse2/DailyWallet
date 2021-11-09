@@ -32,7 +32,6 @@ public class Wallet extends Fragment {
     private String wallet;
     private Button addReceipt;
 
-
     public Wallet() {
         // Required empty public constructor
     }
@@ -73,7 +72,7 @@ public class Wallet extends Fragment {
         //Init button view
         TextView walletName = v.findViewById(R.id.walletName);
         FloatingActionButton back = v.findViewById(R.id.backToHome);
-        addReceipt.findViewById(R.id.addReceipt);
+        addReceipt = v.findViewById(R.id.addReceipt);
 
         //Set arguments
         if (getArguments() != null) {
@@ -105,10 +104,4 @@ public class Wallet extends Fragment {
         return v;
     }
 
-  /* public void  startAddReceiptActivity(){
-       Intent intent = new Intent(this, AddReceiptActivity.class);
-       startActivity(intent);
-    }
-
-*/
 }
