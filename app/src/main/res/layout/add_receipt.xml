@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+
+    tools:context=".ui.main.activity.AddReceiptActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:text="Add a receipt"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:textColor="@color/black"
+
+
+
+        />
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProductName"
+        android:hint="Product name"
+        android:inputType="text"
+        android:padding="13dp"
+        android:background="@drawable/back"
+        android:layout_marginBottom="9dp"
+
+        />
+
+    <EditText
+        android:id="@+id/ProductDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:hint="Date"
+        android:inputType="date"
+        android:padding="10dp"
+        android:layout_marginBottom="9dp"
+
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ProductHeure"
+        android:hint="hours"
+        android:inputType="time"
+        android:padding="10dp"
+        android:background="@drawable/back"
+        android:layout_marginBottom="9dp"
+
+        />
+
+
+    <Spinner
+        android:id="@+id/autocomplete_country"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:background="@drawable/back"
+        android:layout_marginBottom="1dp"
+        />
+
+    <EditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/back"
+        android:gravity="top"
+        android:hint="add notes"
+        android:inputType="text|textMultiLine"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="10dp"
+
+        />
+
+    <Button
+        android:id="@+id/ScanReceipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="10dp"
+        android:text="Scan my receipt"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/AddReceipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="10dp"
+        android:text="Add"
+        android:textSize="20sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/backReceipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        app:srcCompat="@drawable/ic_action_menu_back"/>
+
+
+
+</LinearLayout>
