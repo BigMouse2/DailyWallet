@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.SectionsPagerAdapter;
+import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
 import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -28,6 +30,7 @@ public class Wallet extends Fragment {
     private static final String ARG_WALLET_NAME = "argWalletName";
 
     private String wallet;
+    private Button addReceipt;
 
 
     public Wallet() {
@@ -70,6 +73,7 @@ public class Wallet extends Fragment {
         //Init button view
         TextView walletName = v.findViewById(R.id.walletName);
         FloatingActionButton back = v.findViewById(R.id.backToHome);
+        addReceipt.findViewById(R.id.addReceipt);
 
         //Set arguments
         if (getArguments() != null) {
@@ -88,8 +92,23 @@ public class Wallet extends Fragment {
             }
         });
 
+        //Button Add receipt
+        addReceipt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, AddReceiptActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //End
         return v;
     }
 
+  /* public void  startAddReceiptActivity(){
+       Intent intent = new Intent(this, AddReceiptActivity.class);
+       startActivity(intent);
+    }
+
+*/
 }
