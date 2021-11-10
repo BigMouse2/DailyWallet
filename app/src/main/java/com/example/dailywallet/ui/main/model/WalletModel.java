@@ -38,6 +38,13 @@ public class WalletModel {
         this.endDate = endDate;
     }
 
+    public WalletModel(String name, float budgetAmount, String startDate, String endDate) {
+        this.name = name;
+        this.budgetAmount = budgetAmount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     @Exclude //pour ne pas envoyer l'ID dans la bdd -> éviter les redondances
     public String getDocumentId() {
         return documentId;

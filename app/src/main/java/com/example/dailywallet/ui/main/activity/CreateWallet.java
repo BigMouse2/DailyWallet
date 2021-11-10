@@ -125,11 +125,13 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         String name = editTextTitle.getText().toString();
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
         String startDate = textViewStartDate.getText().toString();
+        String endDate = textViewEndDate.getText().toString();
 
         //appeler le constructeur
        // WalletModel wallet = new WalletModel(name,budgetAmount);
         //WalletModel wallet = new WalletModel(name,budgetAmount,currency, startDate,endDate);
-        WalletModel wallet = new WalletModel(name,budgetAmount,startDate);
+        //WalletModel wallet = new WalletModel(name,budgetAmount,startDate);
+        WalletModel wallet = new WalletModel(name,budgetAmount,startDate,endDate);
 
         //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
@@ -190,12 +192,12 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         if (startDate.isEmpty()) {
-            startDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+            startDate = +dayOfMonth + "/" + month + "/" + year;
             textViewStartDate.setText(startDate);
 
             showDatePickerDialog(getStartDateListener());
         } else {
-            endDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+            endDate = +dayOfMonth + "/" + month + "/" + year;
             textViewEndDate.setText((endDate));
         }
     }
@@ -203,7 +205,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         return new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
              //   boolean showEndPicker = startDate.isEmpty();
-                startDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+                startDate = +dayOfMonth + "/" + month + "/" + year;
                 textViewStartDate.setText(startDate);
 
                 //show end picker only when start date is set first time
@@ -218,7 +220,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     public DatePickerDialog.OnDateSetListener getEndDateListener() {
         return new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+                endDate = +dayOfMonth + "/" + month + "/" + year;
                 textViewEndDate.setText(endDate);
             }
         };
