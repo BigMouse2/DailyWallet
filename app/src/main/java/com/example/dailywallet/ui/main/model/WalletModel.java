@@ -10,9 +10,10 @@ public class WalletModel {
     private String name;
     private float budgetAmount;
     private String currency;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private ReceiptModel receipt;
+
 
     public WalletModel() {
         //non-args construc for firestore
@@ -21,6 +22,20 @@ public class WalletModel {
     public WalletModel(String name, float budgetAmount) {
         this.name = name;
         this.budgetAmount = budgetAmount;
+    }
+
+    public WalletModel(String name, float budgetAmount, String startDate) {
+        this.name = name;
+        this.budgetAmount = budgetAmount;
+        this.startDate = startDate;
+    }
+
+    public WalletModel(String name, float budgetAmount, String currency, String startDate, String endDate) {
+        this.name = name;
+        this.budgetAmount = budgetAmount;
+        this.currency = currency;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Exclude //pour ne pas envoyer l'ID dans la bdd -> éviter les redondances
@@ -56,19 +71,19 @@ public class WalletModel {
         this.currency = currency;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

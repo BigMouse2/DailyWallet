@@ -1,9 +1,11 @@
 package com.example.dailywallet.ui.main.activity;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,12 +31,6 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     private static final String TAG = "createWallet";
 
-    private static final String KEY_TITLE = "title";
-    private static final String KEY_AMOUNT = "amount";
-    private static final String KEY_CURRENCY = "currency";
-    private static final String KEY_STARTDATE = "startDate";
-    private static final String KEY_ENDATE = "endDate";
-
     //elements du visuel
     private EditText editTextTitle;
     private EditText editTextAmount;
@@ -42,6 +38,11 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     private TextView textViewStartDate;
     private TextView textViewEndDate;
 
+    //init dates
+    private String startDate ="";
+    private String endDate ="";
+
+    //références à la bdd
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
     private DocumentReference walletDocument = db.document("Wallet/Wallet2");
@@ -61,10 +62,10 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         //choisir sa devise
 
         //choisir sa date de début
-        findViewById(R.id.buttonPickStartDate).setOnClickListener(view -> showStartDatePickerDialog());
+        findViewById(R.id.buttonPickStartDate).setOnClickListener(view -> showDatePickerDialog(getStartDateListener()));
 
         //choisir sa date de fin
-        findViewById(R.id.buttonPickEndDate).setOnClickListener(view -> showEndDatePickerDialog());
+        findViewById(R.id.buttonPickEndDate).setOnClickListener(view -> showDatePickerDialog(getEndDateListener()));
 
         //sauvegarder son wallet
         Button button = findViewById(R.id.save);
@@ -123,9 +124,12 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         // 1) renseigner chaque attribut du model
         String name = editTextTitle.getText().toString();
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
+        String startDate = textViewStartDate.getText().toString();
 
         //appeler le constructeur
-        WalletModel wallet = new WalletModel(name,budgetAmount);
+       // WalletModel wallet = new WalletModel(name,budgetAmount);
+        //WalletModel wallet = new WalletModel(name,budgetAmount,currency, startDate,endDate);
+        WalletModel wallet = new WalletModel(name,budgetAmount,startDate);
 
         //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
@@ -170,11 +174,11 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         startActivity(intent);
     }
 
-    //choisir sa date de début
-    public void showStartDatePickerDialog(){
+    //ouvrir le datePicker
+    public void showDatePickerDialog(DatePickerDialog.OnDateSetListener listener){
         DatePickerDialog startDatePickerDialog = new DatePickerDialog(
                 this,
-                this,
+                listener,
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
@@ -182,26 +186,41 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         startDatePickerDialog.show();
     }
 
-    //choisir sa date de fin
-    public void showEndDatePickerDialog(){
-        DatePickerDialog startDatePickerDialog = new DatePickerDialog(
-                this,
-                this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        );
-        startDatePickerDialog.show();
-    }
-
-    //retourne les dates choisies aux methods DatePicker
+    //retourne les dates choisies au DatePickerDialog
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String startDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
-        textViewStartDate.setText(startDate);
+        if (startDate.isEmpty()) {
+            startDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+            textViewStartDate.setText(startDate);
 
-        //end date
-/*        String endDate = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
-        textViewEndDate.setText(endDate);*/
+            showDatePickerDialog(getStartDateListener());
+        } else {
+            endDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+            textViewEndDate.setText((endDate));
+        }
+    }
+    public DatePickerDialog.OnDateSetListener getStartDateListener() {
+        return new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+             //   boolean showEndPicker = startDate.isEmpty();
+                startDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+                textViewStartDate.setText(startDate);
+
+                //show end picker only when start date is set first time
+/*                if (showEndPicker) {
+                    showDatePickerDialog(getEndDateListener());
+                }*/
+            }
+        };
+    }
+
+    //retourne la date de fin
+    public DatePickerDialog.OnDateSetListener getEndDateListener() {
+        return new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                endDate = "Day/Month/Year:" + dayOfMonth + "/" + month + "/" + year;
+                textViewEndDate.setText(endDate);
+            }
+        };
     }
 }

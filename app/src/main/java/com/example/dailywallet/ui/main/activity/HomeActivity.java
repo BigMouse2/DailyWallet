@@ -66,7 +66,7 @@ public class HomeActivity extends Activity{
                     walletListName.add(wallet.getName());
 
                 }
-                // 3) afficher les wallets
+                // 3) afficher les wallets dans la liste
                 ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.activity_home_listview ,R.id.textView,walletListName);
                 editWalletList.setAdapter(arrayAdapter);
             }
