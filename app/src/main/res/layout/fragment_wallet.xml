@@ -153,7 +153,6 @@
             android:id="@+id/spinner"
             android:layout_width="188dp"
             android:layout_height="48dp"
-            android:entries="@array/existing_wallet_example"
             android:theme="@style/Theme.DailyWallet.AppBarOverlay"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +160,7 @@
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="201dp" />
+            tools:layout_conversion_absoluteWidth="202dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
