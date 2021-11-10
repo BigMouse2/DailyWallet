@@ -1,4 +1,4 @@
-package com.example.dailywallet.ui.main;
+package com.example.dailywallet.ui.main.adaptater;
 
 import android.content.Context;
 import androidx.annotation.Nullable;
@@ -57,7 +57,4 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return 4;
     }
 
-    public Context getmContext() {
-        return mContext;
-    }
 }

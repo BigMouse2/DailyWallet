@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.dailywallet.R;
-import com.example.dailywallet.ui.main.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
 import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
