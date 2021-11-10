@@ -10,7 +10,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addReceipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add a receipt"
@@ -41,10 +41,10 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@drawable/ic_action_menu_back"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/addReceipt"
+        app:layout_constraintEnd_toStartOf="@+id/addReceipt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/addReceipt"
         tools:layout_conversion_absoluteHeight="56dp"
         tools:layout_conversion_absoluteWidth="56dp" />
 
@@ -115,10 +115,10 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_share"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/addReceipt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/addReceipt"
+        app:layout_constraintTop_toTopOf="@+id/addReceipt"
         tools:layout_conversion_absoluteHeight="56dp"
         tools:layout_conversion_absoluteWidth="56dp" />
 
