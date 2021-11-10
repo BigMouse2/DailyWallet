@@ -42,6 +42,13 @@
         <item name="android:fontFamily">@font/abel</item>
     </style>
 
+    <!-- ResearchBar Style -->
+    <style name="Theme.DailyWallet.Research" parent="Theme.DailyWallet.AppBarOverlay">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:color">@color/black</item>
+
+    </style>
+
     <!-- ActionBar Style -->
     <style name="Theme.DailyWallet.AppBar" parent="android:Widget.ActionBar">
         <item name="android:fontFamily">@font/iceberg</item>

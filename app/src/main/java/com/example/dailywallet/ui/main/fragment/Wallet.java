@@ -68,7 +68,7 @@ public class Wallet extends Fragment {
         Context context = v.getContext();
 
         //Init button view
-        TextView walletName = v.findViewById(R.id.walletNameReceipt);
+        TextView walletName = v.findViewById(R.id.walletName);
         FloatingActionButton back = v.findViewById(R.id.backToHome);
         addReceipt = v.findViewById(R.id.addReceipt);
 
