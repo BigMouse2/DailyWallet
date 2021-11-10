@@ -37,13 +37,13 @@
 
         <ImageView
             android:id="@+id/logoApp"
-            android:layout_width="249dp"
-            android:layout_height="247dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:src="@drawable/app_ico"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
             app:srcCompat="@drawable/app_ico" />
 
         <TextView
@@ -65,44 +65,38 @@
             android:id="@+id/titleWalletList"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
             android:text="My Wallets"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/wallet_list"
-            app:layout_constraintEnd_toEndOf="@+id/wallet_list"
-            app:layout_constraintStart_toStartOf="@+id/wallet_list"
+            app:layout_constraintEnd_toEndOf="@+id/appTitle"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="@+id/appTitle"
             app:layout_constraintTop_toBottomOf="@+id/appTitle" />
 
         <ListView
             android:id="@+id/wallet_list"
             style="@style/Widget.AppCompat.ListView.Menu"
-            android:layout_width="196dp"
-            android:layout_height="139dp"
-            android:layout_marginEnd="32dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/round_border_grey_zone"
+            android:cacheColorHint="#723D70C6"
+            android:headerDividersEnabled="true"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toTopOf="@+id/createWallet"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appTitle" />
-
-        <TextView
-            android:id="@+id/joinWallet"
-            android:layout_width="107dp"
-            android:layout_height="52dp"
-            android:text="Join en existing Wallet"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/wallet_list"
-            app:layout_constraintEnd_toStartOf="@+id/wallet_list"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/wallet_list" />
+            app:layout_constraintEnd_toEndOf="@+id/logoApp"
+            app:layout_constraintStart_toStartOf="@+id/logoApp"
+            app:layout_constraintTop_toBottomOf="@+id/titleWalletList" />
 
         <Button
             android:id="@+id/createWallet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/iceberg"
             android:text="create new Wallet"
             android:textSize="20sp"
@@ -110,8 +104,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appTitle"
-            app:layout_constraintVertical_bias="0.912" />
+            app:layout_constraintTop_toBottomOf="@+id/wallet_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

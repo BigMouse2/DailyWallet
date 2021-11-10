@@ -13,12 +13,14 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="124dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="My Wallet"
-            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/textView3"
-            app:layout_constraintEnd_toEndOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="@+id/edit_text_title"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/edit_text_title"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +29,7 @@
             android:layout_width="128dp"
             android:layout_height="18dp"
             android:text="Wallet name:"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_text_title"
             app:layout_constraintStart_toStartOf="@+id/edit_text_title" />
 
@@ -36,7 +38,7 @@
             android:layout_width="131dp"
             android:layout_height="23dp"
             android:text="Define your budget:"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_text_amount"
             app:layout_constraintStart_toStartOf="@+id/edit_text_amount" />
 
@@ -46,7 +48,7 @@
             android:layout_height="20dp"
             android:layout_marginBottom="4dp"
             android:text="Choose your currency:"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/spinnerCurrency"
             app:layout_constraintStart_toStartOf="@+id/spinnerCurrency" />
 

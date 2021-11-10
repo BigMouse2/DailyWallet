@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.dailywallet.R;
-import com.example.dailywallet.ui.main.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
 import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -70,7 +68,7 @@ public class Wallet extends Fragment {
         Context context = v.getContext();
 
         //Init button view
-        TextView walletName = v.findViewById(R.id.walletName);
+        TextView walletName = v.findViewById(R.id.walletNameReceipt);
         FloatingActionButton back = v.findViewById(R.id.backToHome);
         addReceipt = v.findViewById(R.id.addReceipt);
 

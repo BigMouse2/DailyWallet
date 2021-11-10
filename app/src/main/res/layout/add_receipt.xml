@@ -27,7 +27,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ProductName"
+        android:id="@+id/walletNameReceipt"
         android:hint="Product name"
         android:inputType="text"
         android:padding="13dp"
