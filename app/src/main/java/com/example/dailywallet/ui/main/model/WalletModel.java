@@ -24,12 +24,6 @@ public class WalletModel {
         this.budgetAmount = budgetAmount;
     }
 
-    public WalletModel(String name, float budgetAmount, String startDate) {
-        this.name = name;
-        this.budgetAmount = budgetAmount;
-        this.startDate = startDate;
-    }
-
     public WalletModel(String name, float budgetAmount, String currency, String startDate, String endDate) {
         this.name = name;
         this.budgetAmount = budgetAmount;

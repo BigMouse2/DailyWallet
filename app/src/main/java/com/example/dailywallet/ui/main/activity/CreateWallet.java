@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -42,6 +44,9 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     private String startDate ="";
     private String endDate ="";
 
+    //init currency
+    private String currency;
+
     //références à la bdd
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
@@ -60,6 +65,29 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         textViewEndDate = findViewById(R.id.text_view_endDate);
 
         //choisir sa devise
+        ArrayAdapter<String> myAdapter= new ArrayAdapter<String>(CreateWallet.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.currency))
+        {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0   ) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+        };
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerSelectedCurrency.setAdapter(myAdapter);
+        spinnerSelectedCurrency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                currency = adapterView.getItemAtPosition(position).toString();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
 
         //choisir sa date de début
         findViewById(R.id.buttonPickStartDate).setOnClickListener(view -> showDatePickerDialog(getStartDateListener()));
@@ -121,17 +149,17 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     //sauvegarder son wallet en bdd
     public void saveWallet(){
-        // 1) renseigner chaque attribut du model
+        // 1) renseigner les attributs du model
         String name = editTextTitle.getText().toString();
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
         String startDate = textViewStartDate.getText().toString();
         String endDate = textViewEndDate.getText().toString();
 
+
         //appeler le constructeur
-       // WalletModel wallet = new WalletModel(name,budgetAmount);
-        //WalletModel wallet = new WalletModel(name,budgetAmount,currency, startDate,endDate);
-        //WalletModel wallet = new WalletModel(name,budgetAmount,startDate);
-        WalletModel wallet = new WalletModel(name,budgetAmount,startDate,endDate);
+        // WalletModel wallet = new WalletModel(name,budgetAmount);
+        //WalletModel wallet = new WalletModel(name,budgetAmount,startDate,endDate);
+        WalletModel wallet = new WalletModel(name, budgetAmount,currency,startDate,endDate);
 
         //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
