@@ -2,16 +2,11 @@ package com.example.dailywallet;
 
 import android.os.Bundle;
 
-import com.example.dailywallet.ui.main.fragment.Wallet;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import com.example.dailywallet.ui.main.SectionsPagerAdapter;
+
+import com.example.dailywallet.ui.main.adaptater.SectionsPagerAdapter;
 import com.example.dailywallet.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
