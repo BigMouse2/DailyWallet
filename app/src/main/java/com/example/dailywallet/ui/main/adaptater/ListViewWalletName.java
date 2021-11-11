@@ -1,6 +1,7 @@
 package com.example.dailywallet.ui.main.adaptater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.fragment.Wallet;
 import com.example.dailywallet.ui.main.model.WalletModel;
 
 import java.util.ArrayList;
@@ -22,10 +25,6 @@ public class ListViewWalletName extends ArrayAdapter<WalletModel> {
     public ListViewWalletName(@NonNull Context context, @NonNull List<WalletModel> walletModelList) {
         super(context, 0, walletModelList);
     }
-
-/*    public ListViewWalletName(Context context, ArrayList<WalletModel> walletModelArrayList) {
-        super();
-    }*/
 
     @NonNull
     @Override
@@ -48,7 +47,12 @@ public class ListViewWalletName extends ArrayAdapter<WalletModel> {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
+                String walletName = wallet.getName();
+                Intent intent = new Intent("wallet_name_list");
+                intent.putExtra("selected_wallet_name",walletName);
+                //intent.putExtra("item",ItemName);
+                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
             }
         });
         return listItemView ;

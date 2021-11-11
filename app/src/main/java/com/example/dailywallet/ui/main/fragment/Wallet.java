@@ -1,15 +1,19 @@
 package com.example.dailywallet.ui.main.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
@@ -50,12 +54,28 @@ public class Wallet extends Fragment {
         return fragment;
     }
 
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            // Get extra data included in the Intent
+            String walletName = intent.getStringExtra("selected_wallet_name");
+            //String ItemName = intent.getStringExtra("item");
+
+            Toast.makeText(getContext(),walletName ,Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             wallet = getArguments().getString(ARG_WALLET_NAME);
         }
+
+        /*//Recupère data Onclick Item list
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("wallet_name_list"));*/
     }
 
     @Override

@@ -32,6 +32,16 @@ public class PlaceholderFragment extends Fragment {
         return fragment;
     }
 
+    public static <string> PlaceholderFragment newWalletInstance(string name) {
+        PlaceholderFragment fragment = new PlaceholderFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("", name);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

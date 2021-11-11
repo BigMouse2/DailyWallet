@@ -1,9 +1,13 @@
 package com.example.dailywallet.ui.main.activity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -11,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.adaptater.ListViewWalletName;
@@ -58,27 +63,15 @@ public class HomeActivity extends Activity{
         editWalletList = findViewById(R.id.wallet_list);
         buttonCreateWallet = findViewById(R.id.createWallet);
 
- /*       //afficher la liste des fragments
-        // 1) se placer dans la colleciton et vérifier qu'elle existe
-        walletReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException error) {
-                if (error != null) {
-                    return;
-                }
-                List<String> walletListName = new ArrayList<>();
 
-                // 2) Remplir la liste des wallets
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) { //documentSnapshot contain one document
-                    WalletModel wallet = documentSnapshot.toObject(WalletModel.class);
-                    wallet.setDocumentId(documentSnapshot.getId());
-                    walletListName.add(wallet.getName());
-                }
-                // 3) afficher les wallets dans la liste
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.activity_home_listview ,R.id.textView,walletListName);
-                editWalletList.setAdapter(arrayAdapter);
-            }
-        });*/
+
+        //Recupère data Onclick Item list
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("wallet_name_list"));
+
+
+
+
         //créer son wallet avec le boutton
         buttonCreateWallet.setOnClickListener(view -> openActivityCreateWallet());
     }
@@ -93,10 +86,17 @@ public class HomeActivity extends Activity{
         startActivity(intent);
     }
 
-    public void onSelectedWallet(){
-        Intent intent = new Intent(this, Wallet.class);
-        startActivity(intent);
-    }
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            // Get extra data included in the Intent
+            String walletName = intent.getStringExtra("selected_wallet_name");
+            //String ItemName = intent.getStringExtra("item");
+
+            Toast.makeText(HomeActivity.this,walletName ,Toast.LENGTH_SHORT).show();
+        }
+    };
 
     private void loadDataInListView(){
         // below line is use to get data from Firebase firestore using collection in android.
@@ -121,6 +121,7 @@ public class HomeActivity extends Activity{
 
                             // after passing this array list to our adapter class we are setting our adapter to our list view.
                             editWalletList.setAdapter(adapter);
+
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
                             Toast.makeText(HomeActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();
