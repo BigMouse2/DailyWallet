@@ -42,8 +42,8 @@ public class HomeActivity extends Activity{
     private ArrayList<WalletModel> walletModelArrayList;
 
     //Public data
-    public static String nameHomeWallet = "_";
-    public static String idHomeWallet = "_";
+    public static String nameHomeWallet;
+    public static String idHomeWallet;
 
 
 
@@ -52,6 +52,7 @@ public class HomeActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         //initialiser notre liste de wallet et l'afficher
         editWalletList = findViewById(R.id.wallet_list);
@@ -101,6 +102,7 @@ public class HomeActivity extends Activity{
         public void onReceive(Context context, Intent intentBroadcast) {
 
             // Get extra data included in the Intent
+            SectionsPagerAdapter.pageAdapterId = 1;
             nameHomeWallet = intentBroadcast.getStringExtra("selected_wallet_name");
             idHomeWallet = intentBroadcast.getStringExtra("selected_wallet_id");
 

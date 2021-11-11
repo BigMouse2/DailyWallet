@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.adaptater.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
@@ -50,8 +51,8 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     private DocumentReference walletDocument = db.document("Wallet/Wallet2");
 
     //Public data
-    public static String nameCreateWallet = "_";
-    public static String idCreateWallet = "_";
+    public static String nameCreateWallet;
+    public static String idCreateWallet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +158,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         String endDate = textViewEndDate.getText().toString();
 
         //Pass data to SectionsPagerAdapter
+        SectionsPagerAdapter.pageAdapterId = 2;
         nameCreateWallet = name;
         idCreateWallet = "toto";
 

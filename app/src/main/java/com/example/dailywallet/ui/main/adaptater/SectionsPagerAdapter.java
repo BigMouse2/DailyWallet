@@ -28,6 +28,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[] {R.string.wallet, R.string.category, R.string.settings, R.string.about};
     private final Context mContext;
 
+    //Data recup
+    public static int pageAdapterId;
     public String nameWallet;
     public String idWallet;
 
@@ -70,17 +72,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
 
     public void getWallet() {
-        if(HomeActivity.nameHomeWallet != "_" && HomeActivity.idHomeWallet != "_"){
+        if(pageAdapterId == 1){
             nameWallet = HomeActivity.nameHomeWallet;
             idWallet = HomeActivity.idHomeWallet;
-            HomeActivity.nameHomeWallet =  "_";
-            HomeActivity.idHomeWallet = "_";
+            //pageAdapterId = 0;
         }
-        if (CreateWallet.nameCreateWallet != "_" && CreateWallet.idCreateWallet != "_"){
+        if (pageAdapterId == 2){
             nameWallet = CreateWallet.nameCreateWallet;
             idWallet = CreateWallet.idCreateWallet;
-            CreateWallet.nameCreateWallet = "_";
-            CreateWallet.idCreateWallet = "_";
+            //pageAdapterId = 0;
         }
         else{
 
