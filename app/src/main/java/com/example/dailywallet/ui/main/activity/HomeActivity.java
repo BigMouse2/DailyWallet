@@ -6,29 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.adaptater.ListViewWalletName;
-import com.example.dailywallet.ui.main.fragment.Wallet;
+import com.example.dailywallet.ui.main.adaptater.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -42,10 +36,16 @@ public class HomeActivity extends Activity{
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
 
+    //Front object
     private Button buttonCreateWallet;
-
     private ListView editWalletList;
     private ArrayList<WalletModel> walletModelArrayList;
+
+    //Public data
+    public static String nameHomeWallet = "_";
+    public static String idHomeWallet = "_";
+
+
 
 
     @Override
@@ -70,9 +70,7 @@ public class HomeActivity extends Activity{
                 new IntentFilter("wallet_name_list"));
 
 
-
-
-        //créer son wallet avec le boutton
+        //créer son wallet avec le bouton
         buttonCreateWallet.setOnClickListener(view -> openActivityCreateWallet());
     }
 
@@ -86,15 +84,29 @@ public class HomeActivity extends Activity{
         startActivity(intent);
     }
 
+    //aller à la page de son wallet
+    public void openActivityMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    //aller à la page de son wallet
+    public Intent passDatatoPageAdapter(){
+        Intent intent = new Intent(this, SectionsPagerAdapter.class);
+        return intent;
+    }
+
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, Intent intentBroadcast) {
 
             // Get extra data included in the Intent
-            String walletName = intent.getStringExtra("selected_wallet_name");
-            //String ItemName = intent.getStringExtra("item");
+            nameHomeWallet = intentBroadcast.getStringExtra("selected_wallet_name");
+            idHomeWallet = intentBroadcast.getStringExtra("selected_wallet_id");
 
-            Toast.makeText(HomeActivity.this,walletName ,Toast.LENGTH_SHORT).show();
+            //OpenMainActivity
+            openActivityMainActivity();
+
         }
     };
 

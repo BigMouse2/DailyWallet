@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 public class Wallet extends Fragment {
 
     private static final String ARG_WALLET_NAME = "argWalletName";
+    private static final String ARG_WALLET_ID = "argWalletID";
 
     private String wallet;
     private Button addReceipt;
@@ -42,29 +43,20 @@ public class Wallet extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param wallet Parameter 1.
+     * @param nameWallet Parameter 1.
+     * @param idWallet Parameter 2.
      * @return A new instance of fragment Wallet.
      */
 
-    public static Wallet newInstance(String wallet) {
+    public static Wallet newInstance(String nameWallet, String idWallet) {
         Wallet fragment = new Wallet();
         Bundle args = new Bundle();
-        args.putString(ARG_WALLET_NAME, wallet);
+        args.putString(ARG_WALLET_NAME, nameWallet);
+        args.putString(ARG_WALLET_ID, idWallet);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            // Get extra data included in the Intent
-            String walletName = intent.getStringExtra("selected_wallet_name");
-            //String ItemName = intent.getStringExtra("item");
-
-            Toast.makeText(getContext(),walletName ,Toast.LENGTH_SHORT).show();
-        }
-    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,10 +64,6 @@ public class Wallet extends Fragment {
         if (getArguments() != null) {
             wallet = getArguments().getString(ARG_WALLET_NAME);
         }
-
-        /*//Recupère data Onclick Item list
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("wallet_name_list"));*/
     }
 
     @Override
@@ -96,6 +84,7 @@ public class Wallet extends Fragment {
         if (getArguments() != null) {
             wallet = getArguments().getString(ARG_WALLET_NAME);
         }
+
 
         //Pass WalletName data
         walletName.setText(wallet);

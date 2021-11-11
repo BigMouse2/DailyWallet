@@ -49,10 +49,11 @@ public class ListViewWalletName extends ArrayAdapter<WalletModel> {
             public void onClick(View view) {
                 //Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
                 String walletName = wallet.getName();
-                Intent intent = new Intent("wallet_name_list");
-                intent.putExtra("selected_wallet_name",walletName);
-                //intent.putExtra("item",ItemName);
-                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intent);
+                String idWallet = wallet.getDocumentId();
+                Intent intentBroadcast = new Intent("wallet_name_list");
+                intentBroadcast.putExtra("selected_wallet_name",walletName);
+                intentBroadcast.putExtra("selected_wallet_id", idWallet);
+                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intentBroadcast);
             }
         });
         return listItemView ;

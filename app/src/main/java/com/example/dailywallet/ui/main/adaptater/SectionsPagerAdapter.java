@@ -1,12 +1,18 @@
 package com.example.dailywallet.ui.main.adaptater;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.activity.CreateWallet;
+import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.example.dailywallet.ui.main.fragment.About;
 import com.example.dailywallet.ui.main.fragment.Category;
 import com.example.dailywallet.ui.main.fragment.Settings;
@@ -22,6 +28,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[] {R.string.wallet, R.string.category, R.string.settings, R.string.about};
     private final Context mContext;
 
+    public String nameWallet;
+    public String idWallet;
+
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
@@ -33,8 +42,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         Fragment fragment = null;
         switch(position){
-            case 0: fragment = Wallet.newInstance("test");
+            case 0: {
+                getWallet();
+                fragment = Wallet.newInstance(nameWallet,idWallet);
                 break;
+            }
             case 1: fragment = new Category();
                 break;
             case 2: fragment = new Settings();
@@ -55,6 +67,24 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show total pages.
         return 4;
+    }
+
+    public void getWallet() {
+        if(HomeActivity.nameHomeWallet != "_" && HomeActivity.idHomeWallet != "_"){
+            nameWallet = HomeActivity.nameHomeWallet;
+            idWallet = HomeActivity.idHomeWallet;
+            HomeActivity.nameHomeWallet =  "_";
+            HomeActivity.idHomeWallet = "_";
+        }
+        if (CreateWallet.nameCreateWallet != "_" && CreateWallet.idCreateWallet != "_"){
+            nameWallet = CreateWallet.nameCreateWallet;
+            idWallet = CreateWallet.idCreateWallet;
+            CreateWallet.nameCreateWallet = "_";
+            CreateWallet.idCreateWallet = "_";
+        }
+        else{
+
+        }
     }
 
 }

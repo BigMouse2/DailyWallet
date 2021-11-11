@@ -49,6 +49,10 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     private CollectionReference walletReference = db.collection("Wallet");
     private DocumentReference walletDocument = db.document("Wallet/Wallet2");
 
+    //Public data
+    public static String nameCreateWallet = "_";
+    public static String idCreateWallet = "_";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +155,10 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
         String startDate = textViewStartDate.getText().toString();
         String endDate = textViewEndDate.getText().toString();
+
+        //Pass data to SectionsPagerAdapter
+        nameCreateWallet = name;
+        idCreateWallet = "toto";
 
 
         //appeler le constructeur

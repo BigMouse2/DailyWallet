@@ -113,6 +113,8 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/round_border_grey_zone"
+            android:foreground="@drawable/round_border_grey_zone"
             android:src="@drawable/app_ico"
             tools:layout_conversion_absoluteHeight="220dp"
             tools:layout_conversion_absoluteWidth="287dp" />
