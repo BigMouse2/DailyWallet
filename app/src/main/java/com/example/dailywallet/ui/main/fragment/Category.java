@@ -1,5 +1,9 @@
 package com.example.dailywallet.ui.main.fragment;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +11,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dailywallet.R;
 
@@ -16,6 +25,10 @@ import com.example.dailywallet.R;
  * create an instance of this fragment.
  */
 public class Category extends Fragment {
+    boolean isImageFitToScreen;
+    TextView textInfo;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +74,45 @@ public class Category extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+        View v = inflater.inflate(R.layout.fragment_category, container, false);
+
+        ImageView imageView = (ImageView) v.findViewById(R.id.addCategory);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View subView = inflater.inflate(R.layout.dialogstyle, null);
+                final EditText subEditText = (EditText)subView.findViewById(R.id.dialogEditText);
+                Drawable drawable = getResources().getDrawable(R.drawable.folder);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Add new category");
+                builder.setView(subView);
+                AlertDialog alertDialog = builder.create();
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        textInfo.setText(subEditText.getText().toString());
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
+
+
+        return v;
+
     }
+
+
+
 }
