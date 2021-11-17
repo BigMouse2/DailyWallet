@@ -46,8 +46,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     //références à la bdd
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference walletReference = db.collection("Wallet");
-    private DocumentReference walletDocument = db.document("Wallet/Wallet2");
+    private CollectionReference walletReference = db.collection("Category");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
                     return true;
                 }
             }
-
         };
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSelectedCurrency.setAdapter(myAdapter);
@@ -95,8 +93,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         //sauvegarder son wallet
         Button button = findViewById(R.id.save);
         button.setOnClickListener(view -> {
-            saveWallet();
-            openActivityMainActivity(); //aller à la page de son wallet
+            openActivityMainActivity(); //save our wallet and open the FragmentWallet
         });
 
         //retourner à la page home
@@ -145,17 +142,14 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     }
 
     //sauvegarder son wallet en bdd
-    public void saveWallet(){
+    public WalletModel saveWallet(){
         // 1) renseigner les attributs du model
         String name = editTextTitle.getText().toString();
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
         String startDate = textViewStartDate.getText().toString();
         String endDate = textViewEndDate.getText().toString();
 
-
         //appeler le constructeur
-        // WalletModel wallet = new WalletModel(name,budgetAmount);
-        //WalletModel wallet = new WalletModel(name,budgetAmount,startDate,endDate);
         WalletModel wallet = new WalletModel(name, budgetAmount,currency,startDate,endDate);
 
         //ajouter le wallet à la collection + verification
@@ -165,6 +159,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
                     Toast.makeText(CreateWallet.this, "Error!",Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
                 });
+        return wallet;
     }
 
 /*    public void loadWallet(View v) {
@@ -197,7 +192,10 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     //aller à la page de son wallet
     public void openActivityMainActivity(){
+        saveWallet();
+        WalletModel walletModel = saveWallet();
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Wallet Model",walletModel);
         startActivity(intent);
     }
 
@@ -232,11 +230,6 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
              //   boolean showEndPicker = startDate.isEmpty();
                 startDate = +dayOfMonth + "/" + month + "/" + year;
                 textViewStartDate.setText(startDate);
-
-                //show end picker only when start date is set first time
-/*                if (showEndPicker) {
-                    showDatePickerDialog(getEndDateListener());
-                }*/
             }
         };
     }

@@ -12,8 +12,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.adaptater.ListViewWalletName;
+import com.example.dailywallet.ui.main.adaptater.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.fragment.Wallet;
 import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -121,6 +123,16 @@ public class HomeActivity extends Activity{
 
                             // after passing this array list to our adapter class we are setting our adapter to our list view.
                             editWalletList.setAdapter(adapter);
+
+                            //send wallet data to our fragment when click
+                            adapter.setOnItemClickListener(new ListViewWalletName.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position) {
+                                    Intent intent1 = new Intent(HomeActivity.this, MainActivity.class);
+                                    intent1.putExtra("Wallet Model",walletModelArrayList.get(position));
+                                    startActivity(intent1);
+                                }
+                            });
                         } else {
                             // if the snapshot is empty we are displaying a toast message.
                             Toast.makeText(HomeActivity.this, "No data found in Database", Toast.LENGTH_SHORT).show();

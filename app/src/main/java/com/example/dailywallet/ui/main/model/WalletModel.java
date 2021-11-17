@@ -1,10 +1,13 @@
 package com.example.dailywallet.ui.main.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.firestore.Exclude;
 
 import java.util.Date;
 
-public class WalletModel {
+public class WalletModel implements Parcelable {
 
     private String documentId;
     private String name;
@@ -19,11 +22,6 @@ public class WalletModel {
         //non-args construc for firestore
     }
 
-    public WalletModel(String name, float budgetAmount) {
-        this.name = name;
-        this.budgetAmount = budgetAmount;
-    }
-
     public WalletModel(String name, float budgetAmount, String currency, String startDate, String endDate) {
         this.name = name;
         this.budgetAmount = budgetAmount;
@@ -32,12 +30,25 @@ public class WalletModel {
         this.endDate = endDate;
     }
 
-    public WalletModel(String name, float budgetAmount, String startDate, String endDate) {
-        this.name = name;
-        this.budgetAmount = budgetAmount;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    protected WalletModel(Parcel in) {
+        documentId = in.readString();
+        name = in.readString();
+        budgetAmount = in.readFloat();
+        currency = in.readString();
+        startDate = in.readString();
+        endDate = in.readString();
     }
+
+    public static final Creator<WalletModel> CREATOR = new Creator<WalletModel>() {
+        @Override
+        public WalletModel createFromParcel(Parcel in) {
+            return new WalletModel(in);
+        }
+        @Override
+        public WalletModel[] newArray(int size) {
+            return new WalletModel[size];
+        }
+    };
 
     @Exclude //pour ne pas envoyer l'ID dans la bdd -> éviter les redondances
     public String getDocumentId() {
@@ -94,5 +105,20 @@ public class WalletModel {
 
     public void setReceipt(ReceiptModel receipt) {
         this.receipt = receipt;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(documentId);
+        parcel.writeString(name);
+        parcel.writeFloat(budgetAmount);
+        parcel.writeString(currency);
+        parcel.writeString(startDate);
+        parcel.writeString(endDate);
     }
 }

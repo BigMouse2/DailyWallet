@@ -1,9 +1,11 @@
 package com.example.dailywallet.ui.main.adaptater;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,21 +13,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.example.dailywallet.ui.main.model.WalletModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewWalletName extends ArrayAdapter<WalletModel> {
+
+    private ArrayList<WalletModel> walletModelArrayList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     // below line is use to inflate the layout for our item of list view.
     public ListViewWalletName(@NonNull Context context, @NonNull List<WalletModel> walletModelList) {
         super(context, 0, walletModelList);
     }
-
-/*    public ListViewWalletName(Context context, ArrayList<WalletModel> walletModelArrayList) {
-        super();
-    }*/
 
     @NonNull
     @Override
@@ -49,8 +60,11 @@ public class ListViewWalletName extends ArrayAdapter<WalletModel> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
+                int position = getPosition(wallet);
+                mListener.onItemClick(position);
             }
         });
         return listItemView ;
+
     }
 }
