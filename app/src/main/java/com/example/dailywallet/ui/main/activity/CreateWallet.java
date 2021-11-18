@@ -154,7 +154,9 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
         //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
-                .addOnSuccessListener(aVoid -> Toast.makeText(CreateWallet.this,"Wallet Saved",Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener((DocumentReference aVoid) -> {
+                    Toast.makeText(CreateWallet.this, "Wallet Saved", Toast.LENGTH_SHORT).show();
+                })
                 .addOnFailureListener(e -> {
                     Toast.makeText(CreateWallet.this, "Error!",Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
