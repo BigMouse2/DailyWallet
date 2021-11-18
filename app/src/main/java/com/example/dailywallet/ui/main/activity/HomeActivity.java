@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -64,11 +66,24 @@ public class HomeActivity extends Activity{
                     wallet.setDocumentId(documentSnapshot.getId());
                     walletModelList.add(wallet);
                     walletListName.add(wallet.getName());
+                    editWalletList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Toast.makeText(getApplicationContext(),wallet.getName(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
 
                 }
+
+
+
                 // 3) afficher les wallets dans la liste
                 ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.activity_home_listview ,R.id.textView,walletListName);
                 editWalletList.setAdapter(arrayAdapter);
+
             }
         });
 

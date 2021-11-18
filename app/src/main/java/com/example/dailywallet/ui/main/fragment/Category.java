@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.activity.CreateWallet;
+import com.example.dailywallet.ui.main.model.CategoryModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +35,7 @@ import com.example.dailywallet.R;
  */
 public class Category extends Fragment {
     boolean isImageFitToScreen;
-    TextView textInfo;
+    TextView nameCategory;
 
 
 
@@ -38,6 +47,9 @@ public class Category extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference categoryReference = db.collection("Category");
 
     public Category() {
         // Required empty public constructor
@@ -76,12 +88,12 @@ public class Category extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_category, container, false);
 
-        ImageView imageView = (ImageView) v.findViewById(R.id.addCategory);
+        ImageView imageView = v.findViewById(R.id.addCategory);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 View subView = inflater.inflate(R.layout.dialogstyle, null);
-                final EditText subEditText = (EditText)subView.findViewById(R.id.dialogEditText);
+                final EditText subEditText = subView.findViewById(R.id.dialogEditText);
                 Drawable drawable = getResources().getDrawable(R.drawable.folder);
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -92,7 +104,22 @@ public class Category extends Fragment {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        textInfo.setText(subEditText.getText().toString());
+                        String name=subEditText.getText().toString();
+                        CategoryModel categoryModel=new CategoryModel(name);
+                        categoryReference.add(categoryModel)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(getActivity(),"category saved ",Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getActivity(),"category Failed ",Toast.LENGTH_SHORT).show();
+                                        Log.d("Category",e.toString());
+                                    }
+                                });
                     }
                 });
 
