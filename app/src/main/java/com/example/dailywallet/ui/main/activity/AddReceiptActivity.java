@@ -45,11 +45,13 @@ public class AddReceiptActivity extends AppCompatActivity {
             @Override
             public boolean isEnabled(int position) {
                 if (position == 0   ) {
+
                     return false;
                 } else {
                     return true;
                 }
             }
+            
         };
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
