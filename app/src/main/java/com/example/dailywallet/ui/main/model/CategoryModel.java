@@ -1,6 +1,6 @@
 package com.example.dailywallet.ui.main.model;
 
-//import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.Exclude;
 
 public class CategoryModel {
 
@@ -17,7 +17,7 @@ public class CategoryModel {
         this.receipt = receipt;
     }
 
-    //@Exclude //pour ne pas envoyer l'ID en bdd -> redondance
+    @Exclude //pour ne pas envoyer l'ID en bdd -> redondance
     public String getDocumentId() {
         return documentId;
     }
