@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -43,13 +44,6 @@ public class HomeActivity extends Activity{
     private ListView editWalletList;
     private ArrayList<WalletModel> walletModelArrayList;
 
-    //Public data
-    public static String nameHomeWallet;
-    public static String idHomeWallet;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,34 +59,6 @@ public class HomeActivity extends Activity{
         //correspondance avec les élèments du visuel
         editWalletList = findViewById(R.id.wallet_list);
         buttonCreateWallet = findViewById(R.id.createWallet);
-
-
-                // 2) Remplir la liste des wallets
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) { //documentSnapshot contain one document
-                    WalletModel wallet = documentSnapshot.toObject(WalletModel.class);
-                    wallet.setDocumentId(documentSnapshot.getId());
-                    walletModelList.add(wallet);
-                    walletListName.add(wallet.getName());
-                    editWalletList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Toast.makeText(getApplicationContext(),wallet.getName(), Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-
-
-
-                }
-
-
-
-                // 3) afficher les wallets dans la liste
-                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.activity_home_listview ,R.id.textView,walletListName);
-                editWalletList.setAdapter(arrayAdapter);
-
-            }
-        });
 
 
         //créer son wallet avec le bouton
@@ -115,26 +81,6 @@ public class HomeActivity extends Activity{
         startActivity(intent);
     }
 
-    //aller à la page de son wallet
-    public Intent passDatatoPageAdapter(){
-        Intent intent = new Intent(this, SectionsPagerAdapter.class);
-        return intent;
-    }
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intentBroadcast) {
-
-            // Get extra data included in the Intent
-            SectionsPagerAdapter.pageAdapterId = 1;
-            nameHomeWallet = intentBroadcast.getStringExtra("selected_wallet_name");
-            idHomeWallet = intentBroadcast.getStringExtra("selected_wallet_id");
-
-            //OpenMainActivity
-            openActivityMainActivity();
-
-        }
-    };
 
     private void loadDataInListView(){
         // below line is use to get data from Firebase firestore using collection in android.

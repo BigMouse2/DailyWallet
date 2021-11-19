@@ -27,7 +27,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private WalletModel walletModel;
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[] {R.string.wallet, R.string.category, R.string.settings, R.string.about};
+    private static final int[] TAB_TITLES = new int[]{R.string.wallet, R.string.category, R.string.settings, R.string.about};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm, WalletModel model) {
@@ -41,20 +41,23 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
         Fragment fragment = null;
-        switch(position){
+        switch (position) {
             //line below, i'm waiting my Custom Object in args
-            case 0: fragment =  Wallet.newInstance(walletModel);
+            case 0:
+                fragment = Wallet.newInstance(walletModel);
                 break;
-            }
-            case 1: fragment = new Category();
+            case 1:
+                fragment = new Category();
                 break;
-            case 2: fragment = new Settings();
+            case 2:
+                fragment = new Settings();
                 break;
-            case 3: fragment = new About();
+            case 3:
+                fragment = new About();
                 break;
         }
         return fragment;
-    }
+}
 
 
     @Nullable
@@ -67,22 +70,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show total pages.
         return 4;
-    }
-
-    public void getWallet() {
-        if(pageAdapterId == 1){
-            nameWallet = HomeActivity.nameHomeWallet;
-            idWallet = HomeActivity.idHomeWallet;
-            //pageAdapterId = 0;
-        }
-        if (pageAdapterId == 2){
-            nameWallet = CreateWallet.nameCreateWallet;
-            idWallet = CreateWallet.idCreateWallet;
-            //pageAdapterId = 0;
-        }
-        else{
-
-        }
     }
 
 }
