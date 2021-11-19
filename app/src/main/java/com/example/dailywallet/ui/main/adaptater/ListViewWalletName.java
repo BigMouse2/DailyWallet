@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,14 +14,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
-import com.example.dailywallet.ui.main.fragment.Wallet;
+import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.example.dailywallet.ui.main.model.WalletModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListViewWalletName extends ArrayAdapter<WalletModel> {
+
+    private ArrayList<WalletModel> walletModelArrayList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     // below line is use to inflate the layout for our item of list view.
     public ListViewWalletName(@NonNull Context context, @NonNull List<WalletModel> walletModelList) {
         super(context, 0, walletModelList);
@@ -47,15 +60,12 @@ public class ListViewWalletName extends ArrayAdapter<WalletModel> {
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
-                String walletName = wallet.getName();
-                String idWallet = wallet.getDocumentId();
-                Intent intentBroadcast = new Intent("wallet_name_list");
-                intentBroadcast.putExtra("selected_wallet_name",walletName);
-                intentBroadcast.putExtra("selected_wallet_id", idWallet);
-                LocalBroadcastManager.getInstance(getContext()).sendBroadcast(intentBroadcast);
+                Toast.makeText(getContext(),"Wallet clicked is : " + wallet.getName(), Toast.LENGTH_SHORT).show();
+                int position = getPosition(wallet);
+                mListener.onItemClick(position);
             }
         });
         return listItemView ;
+
     }
 }

@@ -14,7 +14,7 @@
     </string-array>
 
     <string-array name="countries_array">
-        <item >Category</item>
+        <item>Category</item>
         <item>Housing</item>
         <item>Food</item>
         <item>HealthCare</item>

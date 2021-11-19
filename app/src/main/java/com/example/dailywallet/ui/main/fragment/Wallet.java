@@ -18,6 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
 import com.example.dailywallet.ui.main.activity.HomeActivity;
+import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.Nullable;
@@ -30,9 +31,10 @@ import org.jetbrains.annotations.Nullable;
 public class Wallet extends Fragment {
 
     private static final String ARG_WALLET_NAME = "argWalletName";
-    private static final String ARG_WALLET_ID = "argWalletID";
+    private static final String FRAGMENT_BUNDLE_KEY = "com.example.Wallet.FRAGMENT_BUNDLE_KEY";
 
-    private String wallet;
+    private WalletModel walletModel;
+
     private Button addReceipt;
 
     public Wallet() {
@@ -43,16 +45,15 @@ public class Wallet extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param nameWallet Parameter 1.
-     * @param idWallet Parameter 2.
+     * @param walletModel Parameter2.
      * @return A new instance of fragment Wallet.
      */
 
-    public static Wallet newInstance(String nameWallet, String idWallet) {
+
+    public static Wallet newInstance(WalletModel walletModel){
         Wallet fragment = new Wallet();
         Bundle args = new Bundle();
-        args.putString(ARG_WALLET_NAME, nameWallet);
-        args.putString(ARG_WALLET_ID, idWallet);
+        args.putParcelable("wallet model", walletModel); //key, value
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,8 +62,10 @@ public class Wallet extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
         if (getArguments() != null) {
-            wallet = getArguments().getString(ARG_WALLET_NAME);
+            WalletModel wallet = bundle.getParcelable("wallet model"); //key
+            wallet.getName();
         }
     }
 
@@ -76,38 +79,35 @@ public class Wallet extends Fragment {
         Context context = v.getContext();
 
         //Init button view
-        TextView walletName = v.findViewById(R.id.walletName);
         FloatingActionButton back = v.findViewById(R.id.backToHome);
         addReceipt = v.findViewById(R.id.addReceipt);
 
+        //Init wallet data
+        TextView walletName = v.findViewById(R.id.walletName);
+        TextView date = v.findViewById(R.id.textDate);
+
         //Set arguments
-        if (getArguments() != null) {
-            wallet = getArguments().getString(ARG_WALLET_NAME);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            WalletModel wallet = bundle.getParcelable("wallet model");
+            //Pass data
+            walletName.setText(wallet.getName());
+            StringBuilder sb = new StringBuilder();
+            sb.append(wallet.getStartDate()).append(" to ").append(wallet.getEndDate());
+            date.setText(sb);
         }
 
-
-        //Pass WalletName data
-        walletName.setText(wallet);
-
         //Back floating button
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, HomeActivity.class);
-                startActivity(intent);
-            }
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(context, HomeActivity.class);
+            startActivity(intent);
         });
 
         //Button Add receipt
-        addReceipt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AddReceiptActivity.class);
-                startActivity(intent);
-            }
+        addReceipt.setOnClickListener(view -> {
+            Intent intent = new Intent(context, AddReceiptActivity.class);
+            startActivity(intent);
         });
-
-        //End
         return v;
     }
 

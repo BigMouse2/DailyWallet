@@ -1,7 +1,9 @@
 package com.example.dailywallet;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.dailywallet.ui.main.model.WalletModel;
 import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +19,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //récupérer un wallet sélectionné depuis "HomeActivity"
+        Intent intent = getIntent();
+        WalletModel walletModel = intent.getParcelableExtra("Wallet Model");
+
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), walletModel);
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
