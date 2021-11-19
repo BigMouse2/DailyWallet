@@ -1,19 +1,15 @@
 package com.example.dailywallet.ui.main.fragment;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
@@ -30,11 +26,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class Wallet extends Fragment {
 
-    private static final String ARG_WALLET_NAME = "argWalletName";
-    private static final String FRAGMENT_BUNDLE_KEY = "com.example.Wallet.FRAGMENT_BUNDLE_KEY";
-
-    private WalletModel walletModel;
-
     private Button addReceipt;
 
     public Wallet() {
@@ -49,7 +40,6 @@ public class Wallet extends Fragment {
      * @return A new instance of fragment Wallet.
      */
 
-
     public static Wallet newInstance(WalletModel walletModel){
         Wallet fragment = new Wallet();
         Bundle args = new Bundle();
@@ -57,7 +47,6 @@ public class Wallet extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

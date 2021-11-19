@@ -47,11 +47,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     //références à la bdd
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference walletReference = db.collection("Wallet");
-
-    //Public data
-    public static String nameCreateWallet;
-    public static String idCreateWallet;
+    private CollectionReference walletReference = db.collection("Category");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
