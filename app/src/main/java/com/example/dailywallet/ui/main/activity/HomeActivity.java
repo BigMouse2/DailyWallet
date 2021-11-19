@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -65,10 +66,32 @@ public class HomeActivity extends Activity{
         buttonCreateWallet = findViewById(R.id.createWallet);
 
 
+                // 2) Remplir la liste des wallets
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) { //documentSnapshot contain one document
+                    WalletModel wallet = documentSnapshot.toObject(WalletModel.class);
+                    wallet.setDocumentId(documentSnapshot.getId());
+                    walletModelList.add(wallet);
+                    walletListName.add(wallet.getName());
+                    editWalletList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Toast.makeText(getApplicationContext(),wallet.getName(), Toast.LENGTH_SHORT).show();
 
-        //Recupère data Onclick Item list
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("wallet_name_list"));
+                        }
+                    });
+
+
+
+                }
+
+
+
+                // 3) afficher les wallets dans la liste
+                ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(),R.layout.activity_home_listview ,R.id.textView,walletListName);
+                editWalletList.setAdapter(arrayAdapter);
+
+            }
+        });
 
 
         //créer son wallet avec le bouton

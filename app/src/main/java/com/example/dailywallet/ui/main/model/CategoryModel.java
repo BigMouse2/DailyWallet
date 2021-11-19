@@ -1,5 +1,7 @@
 package com.example.dailywallet.ui.main.model;
 
+//import com.google.firebase.firestore.Exclude;
+
 import com.google.firebase.firestore.Exclude;
 
 public class CategoryModel {
@@ -10,6 +12,10 @@ public class CategoryModel {
 
     public CategoryModel() {
         //non-args constructur for firestore
+    }
+
+    public CategoryModel(String name) {
+        this.name = name;
     }
 
     public CategoryModel(String name, ReceiptModel receipt) {
