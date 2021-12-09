@@ -1,43 +1,69 @@
 package com.example.dailywallet.ui.main.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
+import com.example.dailywallet.ui.main.model.ReceiptModel;
+import com.example.dailywallet.ui.main.model.WalletModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.jetbrains.annotations.Nullable;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class AddReceiptActivity extends AppCompatActivity {
-    private Button button1;
+
+    private static final String TAG = "addReceipt";
+
+    private WalletModel walletModel;
+
+    private String idWalletReference;
+
+    //références à la bdd
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReferenceWallet = db.collection("Wallet");
+
+
+
+    private EditText nameReceipt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_receipt);
 
-        //Init front var
-        Spinner mySpinner= (Spinner) findViewById(R.id.autocomplete_country);
-        FloatingActionButton back = findViewById(R.id.backReceipt);
+        //récupération du wallet concerné
+        Intent intent = getIntent();
+        walletModel = intent.getParcelableExtra("Wallet Model");
 
+        //Init front var
+        Spinner mySpinner= findViewById(R.id.autocomplete_country);
+        FloatingActionButton back = findViewById(R.id.backReceipt);
+        nameReceipt = findViewById(R.id.nameReceipt);
 
         //Spinner
         ArrayAdapter<String> myAdapter= new ArrayAdapter<String>(AddReceiptActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.countries_array))
@@ -92,15 +118,56 @@ public class AddReceiptActivity extends AppCompatActivity {
             }
         });
 
+
         //Back floating button binding
         back.setOnClickListener(view -> openActivityMainActivity());
+
+        //sauvegarder son receipt
+        Button button = findViewById(R.id.addReceipt);
+        button.setOnClickListener(view -> {
+            saveReceipt(); //save our Receipt
+        });
+   }
+
+   @Override
+   public void onStart(){
+        super.onStart();
+        idWalletReference = getIdWalletReference(walletModel);
+   }
+
+   public ReceiptModel saveReceipt(){
+        // renseigner les attributs du model
+       String name = nameReceipt.getText().toString();
+       //appeler le constructeur
+       ReceiptModel receipt = new ReceiptModel(name);
+       //Add receipt
+       collectionReferenceWallet.document(idWalletReference).collection("Receipt List").add(receipt)
+               .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                   @Override
+                   public void onSuccess(DocumentReference documentReference) {
+                       Toast.makeText(AddReceiptActivity.this, "Receipt Saved", Toast.LENGTH_SHORT).show();
+                   }
+               })
+               .addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(AddReceiptActivity.this, "Error !", Toast.LENGTH_SHORT).show();
+                       Log.d(TAG, e.toString());
+                   }
+               });
+               return receipt;
+   }
+
+ //get selected ID wallet
+   public String getIdWalletReference(@NonNull WalletModel walletModel){
+        String id = walletModel.getDocumentId();
+        return id;
    }
 
     //aller à la page de son wallet
     public void openActivityMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
+    //    intent.putExtra("Wallet Model", walletModel);
         startActivity(intent);
     }
-
-
 }

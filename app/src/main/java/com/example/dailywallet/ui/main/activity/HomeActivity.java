@@ -49,12 +49,10 @@ public class HomeActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
         //initialiser notre liste de wallet et l'afficher
         editWalletList = findViewById(R.id.wallet_list);
         walletModelArrayList = new ArrayList<>();
         loadDataInListView();
-
 
         //correspondance avec les élèments du visuel
         editWalletList = findViewById(R.id.wallet_list);
@@ -80,7 +78,6 @@ public class HomeActivity extends Activity{
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
 
     private void loadDataInListView(){
         // below line is use to get data from Firebase firestore using collection in android.

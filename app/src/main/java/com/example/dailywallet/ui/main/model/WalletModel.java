@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.firebase.firestore.Exclude;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class WalletModel implements Parcelable {
@@ -15,7 +16,7 @@ public class WalletModel implements Parcelable {
     private String currency;
     private String startDate;
     private String endDate;
-    private ReceiptModel receipt;
+    private ArrayList<ReceiptModel> receipt;
 
 
     public WalletModel() {
@@ -29,6 +30,15 @@ public class WalletModel implements Parcelable {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+    /*
+    public WalletModel(String documentId, String name, float budgetAmount, String currency, String startDate, String endDate) {
+        this.documentId = documentId;
+        this.name = name;
+        this.budgetAmount = budgetAmount;
+        this.currency = currency;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }*/
 
     protected WalletModel(Parcel in) {
         documentId = in.readString();
@@ -50,7 +60,7 @@ public class WalletModel implements Parcelable {
         }
     };
 
-    @Exclude //pour ne pas envoyer l'ID dans la bdd -> éviter les redondances
+    //pour ne pas envoyer l'ID dans la bdd -> éviter les redondances
     public String getDocumentId() {
         return documentId;
     }
@@ -99,11 +109,11 @@ public class WalletModel implements Parcelable {
         this.endDate = endDate;
     }
 
-    public ReceiptModel getReceipt() {
+    public ArrayList<ReceiptModel> getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(ReceiptModel receipt) {
+    public void setReceipt(ArrayList<ReceiptModel> receipt) {
         this.receipt = receipt;
     }
 

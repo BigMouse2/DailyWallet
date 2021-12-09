@@ -22,6 +22,10 @@ public class ReceiptModel {
         this.price = price;
     }
 
+    public ReceiptModel(String name) {
+        this.name = name;
+    }
+
     public ReceiptModel(DateTime hour, float price) {
         this.hour = hour;
         this.price = price;

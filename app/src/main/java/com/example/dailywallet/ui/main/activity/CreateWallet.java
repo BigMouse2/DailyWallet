@@ -14,18 +14,26 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dailywallet.MainActivity;
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.adaptater.SectionsPagerAdapter;
 import com.example.dailywallet.ui.main.model.WalletModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.Calendar;
+
 
 public class CreateWallet extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -48,10 +56,13 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     //références à la bdd
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference walletReference = db.collection("Wallet");
+    public DocumentReference walletDocumentRef;
 
-    //Public data
-    public static String nameCreateWallet;
-    public static String idCreateWallet;
+    /*
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseUser user = auth.getCurrentUser();*/
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +109,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         //sauvegarder son wallet
         Button button = findViewById(R.id.save);
         button.setOnClickListener(view -> {
+            //setIdDocRef();
             openActivityMainActivity(); //save our wallet and open the FragmentWallet
         });
 
@@ -145,7 +157,6 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
             }
         });*/
     }
-
     //sauvegarder son wallet en bdd
     public WalletModel saveWallet(){
         // 1) renseigner les attributs du model
@@ -153,6 +164,7 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         float budgetAmount = Float.parseFloat(editTextAmount.getText().toString());
         String startDate = textViewStartDate.getText().toString();
         String endDate = textViewEndDate.getText().toString();
+        String docID;
 
         //appeler le constructeur
         WalletModel wallet = new WalletModel(name, budgetAmount,currency,startDate,endDate);
@@ -161,12 +173,48 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         walletReference.add(wallet)
                 .addOnSuccessListener((DocumentReference aVoid) -> {
                     Toast.makeText(CreateWallet.this, "Wallet Saved", Toast.LENGTH_SHORT).show();
+                    walletDocumentRef = aVoid;
+                    String id = walletDocumentRef.getId();
+
+                    walletDocumentRef.update("documentId", id)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(CreateWallet.this, "wallet Id has been set ", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CreateWallet.this, "Error while setting Id !",Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, e.toString());
+                                }
+                            });
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(CreateWallet.this, "Error!",Toast.LENGTH_SHORT).show();
                     Log.d(TAG, e.toString());
                 });
         return wallet;
+    }
+
+    //TODO: call this method upstair instead duplicate code
+    public void setIdDocRef(){
+        String id = walletDocumentRef.getId();
+        walletDocumentRef.update("documentId", id)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(CreateWallet.this, "wallet Id has been set ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(CreateWallet.this, "Error while setting Id !",Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, e.toString());
+                    }
+                });
     }
 
 /*    public void loadWallet(View v) {
@@ -199,10 +247,9 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
 
     //aller à la page de son wallet
     public void openActivityMainActivity(){
-        saveWallet();
-        WalletModel walletModel = saveWallet();
+        WalletModel walletModel = saveWallet(); //sauvegarde le wallet
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("Wallet Model",walletModel);
+        intent.putExtra("Wallet Model",walletModel); //transmet le wallet
         startActivity(intent);
     }
 
@@ -234,7 +281,6 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
     public DatePickerDialog.OnDateSetListener getStartDateListener() {
         return new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-             //   boolean showEndPicker = startDate.isEmpty();
                 startDate = +dayOfMonth + "/" + month + "/" + year;
                 textViewStartDate.setText(startDate);
             }
