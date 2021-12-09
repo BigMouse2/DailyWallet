@@ -98,6 +98,7 @@ public class Wallet extends Fragment {
 
         //Accordion
         AccordionList accordionList = v.findViewById(R.id.accordion);
+        AccordionItem[] listAccordionItem;
         AccordionItem accordionItem = new AccordionItem("toto","contenu");
 
         /*String AccordionTitle = "Pizza";
@@ -173,6 +174,5 @@ public class Wallet extends Fragment {
     }
 
     public void openDialog(){
-
     }
 }

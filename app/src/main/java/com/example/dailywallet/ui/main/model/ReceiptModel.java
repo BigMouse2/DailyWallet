@@ -10,7 +10,7 @@ public class ReceiptModel {
     private String documentId;
     private String name;
     private DateTime hour;
-    private Date date;
+    private String date;
     private String note;
     private float price;
 
@@ -18,12 +18,15 @@ public class ReceiptModel {
         //non-args construc for firestore
     }
 
-    public ReceiptModel(float price) {
-        this.price = price;
-    }
-
     public ReceiptModel(String name) {
         this.name = name;
+    }
+
+    public ReceiptModel(String name, String date, String note, float price) {
+        this.name = name;
+        this.date = date;
+        this.note = note;
+        this.price = price;
     }
 
     public ReceiptModel(DateTime hour, float price) {
@@ -31,7 +34,7 @@ public class ReceiptModel {
         this.price = price;
     }
 
-    public ReceiptModel(String name, DateTime hour, Date date, String note, float price) {
+    public ReceiptModel(String name, DateTime hour, String date, String note, float price) {
         this.name = name;
         this.hour = hour;
         this.date = date;
@@ -64,11 +67,11 @@ public class ReceiptModel {
         this.hour = hour;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

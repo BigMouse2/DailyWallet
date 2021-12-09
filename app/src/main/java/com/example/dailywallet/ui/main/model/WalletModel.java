@@ -16,8 +16,6 @@ public class WalletModel implements Parcelable {
     private String currency;
     private String startDate;
     private String endDate;
-    private ArrayList<ReceiptModel> receipt;
-
 
     public WalletModel() {
         //non-args construc for firestore
@@ -30,7 +28,7 @@ public class WalletModel implements Parcelable {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-    /*
+
     public WalletModel(String documentId, String name, float budgetAmount, String currency, String startDate, String endDate) {
         this.documentId = documentId;
         this.name = name;
@@ -38,7 +36,7 @@ public class WalletModel implements Parcelable {
         this.currency = currency;
         this.startDate = startDate;
         this.endDate = endDate;
-    }*/
+    }
 
     protected WalletModel(Parcel in) {
         documentId = in.readString();
@@ -109,13 +107,6 @@ public class WalletModel implements Parcelable {
         this.endDate = endDate;
     }
 
-    public ArrayList<ReceiptModel> getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(ArrayList<ReceiptModel> receipt) {
-        this.receipt = receipt;
-    }
 
     @Override
     public int describeContents() {

@@ -31,8 +31,6 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="first_wallet"
-
-
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="34sp"
@@ -84,7 +82,6 @@
                 android:background="@drawable/green_gradient_up"
                 tools:layout_conversion_absoluteHeight="39dp"
                 tools:layout_conversion_absoluteWidth="286dp">
-
 
                 <TextView
                     android:id="@+id/textView6"

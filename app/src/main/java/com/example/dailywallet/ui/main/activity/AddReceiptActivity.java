@@ -1,5 +1,6 @@
 package com.example.dailywallet.ui.main.activity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -35,7 +38,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class AddReceiptActivity extends AppCompatActivity {
+import java.util.Calendar;
+
+public class AddReceiptActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     private static final String TAG = "addReceipt";
 
@@ -47,9 +52,10 @@ public class AddReceiptActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReferenceWallet = db.collection("Wallet");
 
-
-
     private EditText nameReceipt;
+    private EditText priceReceipt;
+    private EditText notesReceipt;
+    private TextView textViewReceiptDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,9 @@ public class AddReceiptActivity extends AppCompatActivity {
         Spinner mySpinner= findViewById(R.id.autocomplete_country);
         FloatingActionButton back = findViewById(R.id.backReceipt);
         nameReceipt = findViewById(R.id.nameReceipt);
+        priceReceipt = findViewById(R.id.priceReceipt);
+        textViewReceiptDate = findViewById(R.id.dateReceipt);
+        notesReceipt = findViewById(R.id.notesReceipt);
 
         //Spinner
         ArrayAdapter<String> myAdapter= new ArrayAdapter<String>(AddReceiptActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.countries_array))
@@ -89,8 +98,7 @@ public class AddReceiptActivity extends AppCompatActivity {
                 {
                     //Toast.makeText(AddReceiptActivity.this, "dsdsdsdsdsdsdsd!", Toast.LENGTH_SHORT).show();
                     // inflate the layout of the popup window
-                    LayoutInflater inflater = (LayoutInflater)
-                            getSystemService(LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     View popupView = inflater.inflate(R.layout.popup_addcategory, null);
 
                     // create the popup window
@@ -114,10 +122,11 @@ public class AddReceiptActivity extends AppCompatActivity {
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent)
             {
-
             }
         });
 
+        //ajouter sa date grâce à un datePicker
+        findViewById(R.id.buttonPickReceiptDate).setOnClickListener(view -> showDatePickerDialog());
 
         //Back floating button binding
         back.setOnClickListener(view -> openActivityMainActivity());
@@ -136,10 +145,16 @@ public class AddReceiptActivity extends AppCompatActivity {
    }
 
    public ReceiptModel saveReceipt(){
+
         // renseigner les attributs du model
        String name = nameReceipt.getText().toString();
+       float price = Float.parseFloat(priceReceipt.getText().toString());
+       String note = notesReceipt.getText().toString();
+       String date = textViewReceiptDate.getText().toString();
+
+
        //appeler le constructeur
-       ReceiptModel receipt = new ReceiptModel(name);
+       ReceiptModel receipt = new ReceiptModel(name, date, note, price);
        //Add receipt
        collectionReferenceWallet.document(idWalletReference).collection("Receipt List").add(receipt)
                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -158,8 +173,28 @@ public class AddReceiptActivity extends AppCompatActivity {
                return receipt;
    }
 
+
+    //ouvrir le datePicker
+    public void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = "Day/Month/Year:" +dayOfMonth +"/" + month + "/" +year;
+        textViewReceiptDate.setText(date);
+    }
+
  //get selected ID wallet
    public String getIdWalletReference(@NonNull WalletModel walletModel){
+
         String id = walletModel.getDocumentId();
         return id;
    }

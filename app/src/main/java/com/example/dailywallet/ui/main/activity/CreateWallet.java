@@ -165,15 +165,15 @@ public class CreateWallet extends AppCompatActivity implements DatePickerDialog.
         String docID;
 
         //appeler le constructeur
-        WalletModel wallet = new WalletModel(name, budgetAmount,currency,startDate,endDate);
+        WalletModel wallet = new WalletModel("", name, budgetAmount,currency,startDate,endDate);
 
         //ajouter le wallet à la collection + verification
         walletReference.add(wallet)
                 .addOnSuccessListener((DocumentReference aVoid) -> {
                     Toast.makeText(CreateWallet.this, "Wallet Saved", Toast.LENGTH_SHORT).show();
                     walletDocumentRef = aVoid;
-                    String id = walletDocumentRef.getId();
 
+                    String id = walletDocumentRef.getId();
                     walletDocumentRef.update("documentId", id)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
