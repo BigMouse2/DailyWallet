@@ -17,27 +17,21 @@
         android:textStyle="bold"
         android:textSize="40dp"
         android:textColor="@color/black"
-
-
-
         />
-
-
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/walletNameReceipt"
+        android:id="@+id/nameReceipt"
         android:hint="Product name"
         android:inputType="text"
         android:padding="13dp"
         android:background="@drawable/back"
         android:layout_marginBottom="9dp"
-
         />
 
     <EditText
-        android:id="@+id/ProductDate"
+        android:id="@+id/productDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/back"
@@ -45,20 +39,17 @@
         android:inputType="date"
         android:padding="10dp"
         android:layout_marginBottom="9dp"
-
-
-        />
+       />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ProductHeure"
+        android:id="@+id/productHour"
         android:hint="hours"
         android:inputType="time"
         android:padding="10dp"
         android:background="@drawable/back"
         android:layout_marginBottom="9dp"
-
         />
 
 
@@ -80,7 +71,6 @@
         android:inputType="text|textMultiLine"
         android:layout_marginTop="9dp"
         android:layout_marginBottom="10dp"
-
         />
 
     <Button
@@ -92,7 +82,7 @@
         android:text="Scan my receipt"
         android:textSize="20sp" />
     <Button
-        android:id="@+id/AddReceipt"
+        android:id="@+id/addReceipt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
@@ -108,7 +98,5 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         app:srcCompat="@drawable/ic_action_menu_back"/>
-
-
 
 </LinearLayout>

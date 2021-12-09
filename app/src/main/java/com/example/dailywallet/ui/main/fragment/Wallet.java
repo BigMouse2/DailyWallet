@@ -3,19 +3,26 @@ package com.example.dailywallet.ui.main.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.dailywallet.R;
 import com.example.dailywallet.ui.main.activity.AddReceiptActivity;
 import com.example.dailywallet.ui.main.activity.HomeActivity;
 import com.example.dailywallet.ui.main.model.WalletModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +33,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class Wallet extends Fragment {
 
+    private static final String TAG = "Wallet";
+
+    //références à la bdd
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference walletReference = db.collection("Wallet");
+    public DocumentReference walletDocumentRef;
+
     private Button addReceipt;
+
 
     public Wallet() {
         // Required empty public constructor
@@ -36,14 +51,14 @@ public class Wallet extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param walletModel Parameter2.
+     * @param walletModel Parameter1.
      * @return A new instance of fragment Wallet.
      */
 
     public static Wallet newInstance(WalletModel walletModel){
         Wallet fragment = new Wallet();
         Bundle args = new Bundle();
-        args.putParcelable("wallet model", walletModel); //key, value
+        args.putParcelable("Wallet Model", walletModel); //key, value
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,8 +68,11 @@ public class Wallet extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bundle = this.getArguments();
         if (getArguments() != null) {
-            WalletModel wallet = bundle.getParcelable("wallet model"); //key
+            WalletModel wallet = bundle.getParcelable("Wallet Model"); //key
             wallet.getName();
+        }
+        else{
+            // ajouter une condition dans le cas du bundle nul (retour en arrière par exemple)
         }
     }
 
@@ -77,12 +95,13 @@ public class Wallet extends Fragment {
 
         //Set arguments
         Bundle bundle = this.getArguments();
+        WalletModel walletModel;
         if (bundle != null) {
-            WalletModel wallet = bundle.getParcelable("wallet model");
             //Pass data
-            walletName.setText(wallet.getName());
+            walletModel = bundle.getParcelable("Wallet Model");
+            walletName.setText(walletModel.getName());
             StringBuilder sb = new StringBuilder();
-            sb.append(wallet.getStartDate()).append(" to ").append(wallet.getEndDate());
+            sb.append(walletModel.getStartDate()).append(" to ").append(walletModel.getEndDate());
             date.setText(sb);
         }
 
@@ -92,12 +111,50 @@ public class Wallet extends Fragment {
             startActivity(intent);
         });
 
+        //Button for Delete Wallet
+        FloatingActionButton buttonDeleteWallet = v.findViewById(R.id.floatingActionButton2);
+        buttonDeleteWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WalletModel wallet = bundle.getParcelable("Wallet Model");
+                openDialog();
+                deleteWallet(wallet);
+
+                //return to Home Activity
+                Intent intent = new Intent(context, HomeActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         //Button Add receipt
         addReceipt.setOnClickListener(view -> {
             Intent intent = new Intent(context, AddReceiptActivity.class);
+            WalletModel wallet = bundle.getParcelable("Wallet Model");
+            intent.putExtra("Wallet Model",wallet);
             startActivity(intent);
         });
         return v;
     }
 
+    public void deleteWallet(WalletModel walletModel){
+        walletReference.document(walletModel.getDocumentId())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+    }
+
+    public void openDialog(){
+
+    }
 }
