@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.DailyWallet" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="android:actionBarItemBackground">@drawable/gradient_drawable</item>
+        <item name="android:actionBarItemBackground">@drawable/green_gradient_down</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -18,7 +18,6 @@
         <!-- Font Family -->
         <item name="android:actionBarTabBarStyle">@style/IcebergTextViewStyle</item>
         <item name="android:textViewStyle">@style/AbelTextViewStyle</item>
-
     </style>
 
     <!-- Boot screen application theme. -->
@@ -38,21 +37,24 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="MainThemeButtonStyle" parent="android:Widget.Holo.Button">
+
+    <style name="MainThemeButtonStyle" >
         <item name="android:fontFamily">@font/abel</item>
-    </style>
-
-    <!-- ResearchBar Style -->
-    <style name="Theme.DailyWallet.Research" parent="Theme.DailyWallet.AppBarOverlay">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:color">@color/black</item>
-
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
     <!-- ActionBar Style -->
     <style name="Theme.DailyWallet.AppBar" parent="android:Widget.ActionBar">
         <item name="android:fontFamily">@font/iceberg</item>
-        <item name="android:background">@drawable/gradient_drawable</item>
+        <item name="android:background">@drawable/green_gradient_down</item>
+    </style>
+
+
+    <!-- Accordion Style -->
+    <style name="Theme.DailyWallet.Accordion" parent="android:Widget.Button">
+        <item name="android:background">@drawable/green_gradient_down</item>
+        <item name="android:panelColorForeground">@drawable/green_gradient_down</item>
     </style>
 
     <!-- Font Style -->

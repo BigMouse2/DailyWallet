@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_drawable"
+        android:background="@drawable/green_gradient_down"
         android:theme="@style/Theme.DailyWallet.Bootscreen">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -42,6 +42,7 @@
             android:layout_marginTop="40dp"
             android:src="@drawable/app_ico"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout"
             app:srcCompat="@drawable/app_ico" />
@@ -50,22 +51,23 @@
             android:id="@+id/appTitle"
             android:layout_width="177dp"
             android:layout_height="42dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/iceberg"
             android:text="Daily Wallet"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="30sp"
 
+            android:textSize="30sp"
             app:layout_constraintBottom_toTopOf="@+id/titleWalletList"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/logoApp"
+            app:layout_constraintStart_toStartOf="@+id/logoApp"
             app:layout_constraintTop_toBottomOf="@+id/logoApp" />
 
         <TextView
             android:id="@+id/titleWalletList"
             android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="16dp"
             android:text="My Wallets"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
@@ -78,7 +80,6 @@
 
         <ListView
             android:id="@+id/wallet_list"
-            style="@style/Widget.AppCompat.ListView.Menu"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/round_border_grey_zone"
@@ -98,7 +99,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/iceberg"
-            android:text="create new Wallet"
+            android:text="Create new Wallet"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

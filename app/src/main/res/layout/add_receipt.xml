@@ -9,15 +9,15 @@
     android:padding="20dp"
 
     tools:context=".ui.main.activity.AddReceiptActivity">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="1dp"
         android:text="Add a receipt"
-        android:textStyle="bold"
-        android:textSize="40dp"
         android:textColor="@color/black"
-
+        android:textSize="34sp"
+        android:textStyle="bold"
 
 
         />

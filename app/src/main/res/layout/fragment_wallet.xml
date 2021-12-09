@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="2dp"
+    android:theme="@style/Theme.DailyWallet"
     tools:context=".ui.main.fragment.Wallet">
 
     <!-- TODO: Update blank fragment layout -->
@@ -23,18 +24,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".ui.main.activity.AddReceiptActivity">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="1dp"
-            android:text="My Receipts"
-            android:textColor="@color/black"
-            android:textSize="40dp"
-            android:textStyle="bold"
-
-
-            />
-
 
         <TextView
             android:id="@+id/walletName"
@@ -45,7 +34,8 @@
 
 
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textSize="34sp"
             android:textStyle="bold" />
 
         <TextView
@@ -61,63 +51,78 @@
             android:textStyle="bold" />
 
 
-        <SearchView
-            android:id="@+id/searchView"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Theme.DailyWallet.Research"
-            tools:layout_conversion_absoluteHeight="29dp"
-            tools:layout_conversion_absoluteWidth="284dp">
+            android:text="My Receipts"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        </SearchView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_drawable"
-            tools:layout_conversion_absoluteHeight="39dp"
-            tools:layout_conversion_absoluteWidth="286dp">
-
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="65dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="8dp"
-                android:text="Filter By:"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_conversion_absoluteHeight="24dp"
-                tools:layout_conversion_absoluteWidth="69dp" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="188dp"
-                android:layout_height="48dp"
-                android:theme="@style/Theme.DailyWallet.AppBarOverlay"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.927"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_conversion_absoluteHeight="48dp"
-                tools:layout_conversion_absoluteWidth="201dp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/imageView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/round_border_grey_zone"
-            android:foreground="@drawable/round_border_grey_zone"
-            android:src="@drawable/app_ico"
-            tools:layout_conversion_absoluteHeight="220dp"
-            tools:layout_conversion_absoluteWidth="287dp" />
+            android:background="@drawable/round_border_transparent"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:searchIcon="@drawable/search"
+                tools:layout_conversion_absoluteHeight="29dp"
+                tools:layout_conversion_absoluteWidth="284dp">
+
+            </SearchView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/green_gradient_up"
+                tools:layout_conversion_absoluteHeight="39dp"
+                tools:layout_conversion_absoluteWidth="286dp">
+
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="65dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Filter By:"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_conversion_absoluteHeight="24dp"
+                    tools:layout_conversion_absoluteWidth="69dp" />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="188dp"
+                    android:layout_height="48dp"
+                    android:entries="@array/filter_receipt"
+                    android:theme="@style/Theme.DailyWallet.AppBarOverlay"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.927"
+                    app:layout_constraintStart_toEndOf="@+id/textView6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_conversion_absoluteHeight="48dp"
+                    tools:layout_conversion_absoluteWidth="201dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <ir.drax.constraintaccordionlist.AccordionList
+            android:id="@+id/accordion"
+            android:layout_width="match_parent"
+            android:layout_height="264dp"
+            android:padding="6dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -127,6 +132,7 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Modify Wallet"
                 app:layout_constraintBottom_toTopOf="@+id/addReceipt"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -149,10 +155,11 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/floatingActionButton2"
+                style="@style/BootThemeButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:src="@android:drawable/ic_menu_share"
+                android:src="@drawable/delete"
                 app:layout_constraintBottom_toBottomOf="@+id/addReceipt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/addReceipt"
