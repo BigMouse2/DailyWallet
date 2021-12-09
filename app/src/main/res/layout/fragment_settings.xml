@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.fragment.Settings">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Settings Page" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="1dp"
+            android:text="Add a receipt"
+            android:textColor="@color/black"
+
+
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/language"
+            app:layout_constraintStart_toStartOf="@+id/language"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/curency"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+            android:entries="@array/currency"
+            app:layout_constraintEnd_toEndOf="@+id/language"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/language"
+            app:layout_constraintTop_toBottomOf="@+id/language"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="201dp" />
+
+        <Spinner
+            android:id="@+id/language"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+            android:entries="@array/language"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_conversion_absoluteHeight="48dp"
+            tools:layout_conversion_absoluteWidth="201dp" />
+
+        <Button
+            android:id="@+id/AddReceipt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:text="Add"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backReceipt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/AddReceipt"
+            app:layout_constraintEnd_toStartOf="@+id/AddReceipt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/AddReceipt"
+            app:srcCompat="@drawable/ic_action_menu_back" />
+
+        <TextView
+            android:id="@+id/face_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Use face Id"
+            app:layout_constraintBottom_toBottomOf="@+id/chip4"
+            app:layout_constraintEnd_toStartOf="@+id/chip4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chip4" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="94dp"
+            android:layout_height="48dp"
+            android:checkable="true"
+            app:chipIcon="@android:drawable/radiobutton_off_background"
+            app:layout_constraintBottom_toTopOf="@+id/AddReceipt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/face_id"
+            app:layout_constraintTop_toBottomOf="@+id/curency" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

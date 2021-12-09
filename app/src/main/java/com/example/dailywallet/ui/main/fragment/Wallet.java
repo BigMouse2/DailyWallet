@@ -26,6 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.Nullable;
 
+import ir.drax.constraintaccordionlist.AccordionItem;
+import ir.drax.constraintaccordionlist.AccordionList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Wallet#newInstance} factory method to
@@ -92,6 +95,21 @@ public class Wallet extends Fragment {
         //Init wallet data
         TextView walletName = v.findViewById(R.id.walletName);
         TextView date = v.findViewById(R.id.textDate);
+
+        //Accordion
+        AccordionList accordionList = v.findViewById(R.id.accordion);
+        AccordionItem accordionItem = new AccordionItem("toto","contenu");
+
+        /*String AccordionTitle = "Pizza";
+        String DateAccordion ="08/11/2021";*/
+
+        //Accordion Style
+        accordionList.setHEADER_BG_COLOR(R.color.colorPrimary);
+        accordionList.setARROW_ICON(R.drawable.arrow_down_light);
+
+        accordionList
+                .push(accordionItem)
+                .build();
 
         //Set arguments
         Bundle bundle = this.getArguments();
