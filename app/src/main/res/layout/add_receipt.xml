@@ -34,26 +34,14 @@
         />
 
     <EditText
-        android:id="@+id/productDate"
+        android:id="@+id/priceReceipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
-        android:hint="Date"
-        android:inputType="date"
-        android:padding="10dp"
         android:layout_marginBottom="9dp"
-       />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/productHour"
-        android:hint="hours"
+        android:background="@drawable/back"
+        android:hint="Price"
         android:inputType="time"
-        android:padding="10dp"
-        android:background="@drawable/back"
-        android:layout_marginBottom="9dp"
-        />
+        android:padding="10dp" />
 
 
     <Spinner
@@ -65,16 +53,35 @@
         />
 
     <EditText
-        android:id="@+id/edit_text"
+        android:id="@+id/notesReceipt"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/back"
-        android:gravity="top"
-        android:hint="add notes"
-        android:inputType="text|textMultiLine"
         android:layout_marginTop="9dp"
         android:layout_marginBottom="10dp"
-        />
+        android:background="@drawable/back"
+        android:gravity="top"
+        android:hint="Add notes"
+        android:inputType="text|textMultiLine" />
+
+    <Button
+        android:id="@+id/buttonPickReceiptDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Define your date"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_startDate"
+        app:layout_constraintStart_toStartOf="@+id/text_view_startDate" />
+
+    <TextView
+        android:id="@+id/dateReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:inputType="date"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPickEndDate"
+        app:layout_constraintStart_toStartOf="@+id/spinnerCurrency" />
 
     <Button
         android:id="@+id/ScanReceipt"
