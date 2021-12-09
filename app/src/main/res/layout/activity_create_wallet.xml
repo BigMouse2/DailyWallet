@@ -26,8 +26,8 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="128dp"
-            android:layout_height="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Wallet name:"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_text_title"
@@ -35,8 +35,8 @@
 
         <TextView
             android:id="@+id/textView7"
-            android:layout_width="131dp"
-            android:layout_height="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Define your budget:"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/edit_text_amount"
@@ -44,8 +44,8 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="149dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="Choose your currency:"
             android:textSize="18sp"
